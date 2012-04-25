@@ -20,8 +20,6 @@
 #define RED 0x08
 
 
-
-
 void InitAD(int sensor);
 int ConvertAD(void);
 void forward(int times, int pulse_right, int pulse_left);
@@ -55,32 +53,31 @@ while(1)
 	{
 
 		InitAD(MIDDLESENSOR);
- 		left = ConvertAD();
+ 		front = ConvertAD();
 
 		InitAD(RIGHTSENSOR);
  		right = ConvertAD();
 
 		InitAD(LEFTSENSOR);
- 		front = ConvertAD();
+ 		left = ConvertAD();
 
 
-		if(front>400 && left>400) // check if front is greater than one square but less than two away from wall
+		if(front>500) // check if front is greater than one square but less than two away from wall
 		{
 		//Delay10KTCYx(10);
 		forward(1,1,1);
-		break;
 		}
+		else
+		{	
+		
+		}
+
 
 	}
 }
 
-for(;;);
-
-
-
 
 }
-
 
 void track( void )
 {	
@@ -137,25 +134,25 @@ void InitAD( int sensor )
 		case RIGHTSENSOR:
 
 			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
-			ADCON0 = 0b00101101;//clear ADCON0 to select channel 0 (AN0)
 			ADCON2 = 0b00001000;//ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
+			ADCON0 = 0b00101101;//clear ADCON0 to select channel 0 (AN0)
+
 			ADCON0bits.ADON = 0x01;//Enable A/D module
 			break;
 
 		// AN 9
 		case MIDDLESENSOR:
 			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
-			ADCON0 = 0b00100101;//clear ADCON0 to select channel 0 (AN0)
-			//ADCON2 = 0b00110001;
 			ADCON2 = 0b00001000; //ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
+			ADCON0 = 0b00100101;//clear ADCON0 to select channel 0 (AN0)
 			ADCON0bits.ADON = 0x01;//Enable A/D module
 			break;
 
 		// AN 8 
 		case LEFTSENSOR:
 			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
-			ADCON0 = 0b00100001;//clear ADCON0 to select channel 0 (AN0)
 			ADCON2 = 0b00001000;//ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
+			ADCON0 = 0b00100001;//clear ADCON0 to select channel 0 (AN0)
 			ADCON0bits.ADON = 0x01;//Enable A/D module
 			break;
 		default:
@@ -178,6 +175,8 @@ int ConvertAD(void)
 	output = temp1 + temp2;		
 	return output;
 }
+
+
 
 void adjust_forward(int times)
 {
