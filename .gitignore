@@ -1,5 +1,7 @@
 *.mcw
 *.mcp
 *.mcs
+*.cof
+*.map
 *~
 
