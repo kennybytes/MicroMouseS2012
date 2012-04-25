@@ -62,10 +62,10 @@ while(1)
  		left = ConvertAD();
 
 
-		if(front>500) // check if front is greater than one square but less than two away from wall
+		if(right<300) // check if front is greater than one square but less than two away from wall
 		{
-		//Delay10KTCYx(10);
-		forward(1,1,1);
+			//Delay10KTCYx(10);
+			forward(20,1,1);
 		}
 		else
 		{	
@@ -74,6 +74,10 @@ while(1)
 
 
 	}
+
+
+
+
 }
 
 
@@ -81,11 +85,11 @@ while(1)
 
 void track( void )
 {	
-		int sum = 0;
+	int sum = 0;
 
-		int right = 0;
-		int left = 0;
-		int front= 0;
+	int right = 0;
+	int left = 0;
+	int front= 0;
 
 	while(1)
 	{

@@ -1,25 +1,25 @@
 MPLINK 4.37, Linker
-Linker Map File - Created Wed Apr 25 13:12:35 2012
+Linker Map File - Created Wed Apr 25 13:35:42 2012
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                _entry_scn       code   0x000000    program   0x000006
                    .cinit    romdata   0x000006    program   0x00000e
-        .code_fronttest.o       code   0x000014    program   0x0007aa
-               _cinit_scn       code   0x0007be    program   0x00009e
-              D1KTCYXCODE       code   0x00085c    program   0x000020
-                    .code       code   0x00087c    program   0x000020
-             _startup_scn       code   0x00089c    program   0x00001c
-             D100TCYXCODE       code   0x0008b8    program   0x00001c
-           .code___init.o       code   0x0008d4    program   0x000002
-         .romdata_c018i.o    romdata   0x0008d6    program   0x000000
-     .idata_fronttest.o_i    romdata   0x0008d6    program   0x000004
-     .romdata_fronttest.o    romdata   0x0008d6    program   0x000000
-        .romdata___init.o    romdata   0x0008d6    program   0x000000
-         .idata_c018i.o_i    romdata   0x0008da    program   0x000000
-            .code_c018i.o       code   0x0008da    program   0x000000
-        .idata___init.o_i    romdata   0x0008da    program   0x000000
+        .code_fronttest.o       code   0x000014    program   0x0007b2
+               _cinit_scn       code   0x0007c6    program   0x00009e
+              D1KTCYXCODE       code   0x000864    program   0x000020
+                    .code       code   0x000884    program   0x000020
+             _startup_scn       code   0x0008a4    program   0x00001c
+             D100TCYXCODE       code   0x0008c0    program   0x00001c
+           .code___init.o       code   0x0008dc    program   0x000002
+         .romdata_c018i.o    romdata   0x0008de    program   0x000000
+     .idata_fronttest.o_i    romdata   0x0008de    program   0x000004
+     .romdata_fronttest.o    romdata   0x0008de    program   0x000000
+        .romdata___init.o    romdata   0x0008de    program   0x000000
+         .idata_c018i.o_i    romdata   0x0008e2    program   0x000000
+            .code_c018i.o       code   0x0008e2    program   0x000000
+        .idata___init.o_i    romdata   0x0008e2    program   0x000000
                 MATH_DATA      udata   0x000000       data   0x00000b
                  .tmpdata      udata   0x00000b       data   0x000006
                 DELAYDAT1      udata   0x000011       data   0x000001
@@ -37,54 +37,54 @@ Linker Map File - Created Wed Apr 25 13:12:35 2012
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x0008d9      
-            2266 out of 66584 program addresses used, program memory utilization is 3%
+                            0x000000    0x0008e1      
+            2274 out of 66584 program addresses used, program memory utilization is 3%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                ConvertAD   0x000236    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                   D100_1   0x0008c6    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
-                    D100x   0x0008c4    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
-                    D1K_1   0x000868    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-                     D1Kx   0x000866    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-             Delay100TCYx   0x0008b8    program     extern C:\MCC18\src\traditional\delays\d100tcyx.asm
-              Delay1KTCYx   0x00085c    program     extern C:\MCC18\src\traditional\delays\d1ktcyx.asm
-                   InitAD   0x0001ca    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-       _D100TCYXCODE_0008   0x0008c0    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
-       _D100TCYXCODE_0012   0x0008ca    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
-       _D100TCYXCODE_0018   0x0008d0    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
-        _D1KTCYXCODE_0010   0x00086c    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0016   0x000872    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+                ConvertAD   0x00023e    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                   D100_1   0x0008ce    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
+                    D100x   0x0008cc    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
+                    D1K_1   0x000870    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+                     D1Kx   0x00086e    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+             Delay100TCYx   0x0008c0    program     extern C:\MCC18\src\traditional\delays\d100tcyx.asm
+              Delay1KTCYx   0x000864    program     extern C:\MCC18\src\traditional\delays\d1ktcyx.asm
+                   InitAD   0x0001d2    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+       _D100TCYXCODE_0008   0x0008c8    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
+       _D100TCYXCODE_0012   0x0008d2    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
+       _D100TCYXCODE_0018   0x0008d8    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
+        _D1KTCYXCODE_0010   0x000874    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0016   0x00087a    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
        ___return_lbl00000   0x000004    program     static                          
-       ___return_lbl00001   0x0008b6    program     static                          
-       ___return_lbl00002   0x00085a    program     static                          
-                   __init   0x0008d4    program     extern C:\MCC18\src\traditional\stdclib\__init.c
-            __zero_memory   0x00087c    program     extern C:\MCC18\src\traditional\proc\p18F4620.asm
-                _do_cinit   0x0007be    program     extern C:\MCC18\src\traditional\startup\c018i.c
+       ___return_lbl00001   0x0008be    program     static                          
+       ___return_lbl00002   0x000862    program     static                          
+                   __init   0x0008dc    program     extern C:\MCC18\src\traditional\stdclib\__init.c
+            __zero_memory   0x000884    program     extern C:\MCC18\src\traditional\proc\p18F4620.asm
+                _do_cinit   0x0007c6    program     extern C:\MCC18\src\traditional\startup\c018i.c
                    _entry   0x000000    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                 _startup   0x00089c    program     extern C:\MCC18\src\traditional\startup\c018i.c
-           adjust_forward   0x0002f4    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                compare_l   0x000892    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
-                copy_loop   0x000830    program     static                          
-            copy_one_byte   0x000836    program     static                          
-                     done   0x00085a    program     static                          
-             done_copying   0x000844    program     static                          
-                  forward   0x0004b8    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-               last_pulse   0x0005ea    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                     loop   0x0008ac    program     static                          
-                   loop_h   0x00088a    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
-                   loop_l   0x000894    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
+                 _startup   0x0008a4    program     extern C:\MCC18\src\traditional\startup\c018i.c
+           adjust_forward   0x0002fc    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                compare_l   0x00089a    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
+                copy_loop   0x000838    program     static                          
+            copy_one_byte   0x00083e    program     static                          
+                     done   0x000862    program     static                          
+             done_copying   0x00084c    program     static                          
+                  forward   0x0004c0    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+               last_pulse   0x0005f2    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                     loop   0x0008b4    program     static                          
+                   loop_h   0x000892    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
+                   loop_l   0x00089c    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
                      main   0x000014    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-               next_pulse   0x000584    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                  reverse   0x000650    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                     test   0x0007d8    program     static                          
-                    track   0x0000be    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                 turnleft   0x000728    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                turnright   0x000692    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-               zero_block   0x00088a    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
+               next_pulse   0x00058c    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                  reverse   0x000658    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                     test   0x0007e0    program     static                          
+                    track   0x0000c6    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                 turnleft   0x000730    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                turnright   0x00069a    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+               zero_block   0x000892    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
                    ADCON0   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F4620.asm
                ADCON0bits   0x000fc2       data     extern C:\MCC18\src\traditional\proc\p18F4620.asm
                    ADCON1   0x000fc1       data     extern C:\MCC18\src\traditional\proc\p18F4620.asm
@@ -305,43 +305,43 @@ Linker Map File - Created Wed Apr 25 13:12:35 2012
                    _entry   0x000000    program     extern C:\MCC18\src\traditional\startup\c018i.c
        ___return_lbl00000   0x000004    program     static                          
                      main   0x000014    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                    track   0x0000be    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                   InitAD   0x0001ca    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                ConvertAD   0x000236    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-           adjust_forward   0x0002f4    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                  forward   0x0004b8    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-               next_pulse   0x000584    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-               last_pulse   0x0005ea    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                  reverse   0x000650    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                turnright   0x000692    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                 turnleft   0x000728    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
-                _do_cinit   0x0007be    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                     test   0x0007d8    program     static                          
-                copy_loop   0x000830    program     static                          
-            copy_one_byte   0x000836    program     static                          
-             done_copying   0x000844    program     static                          
-                     done   0x00085a    program     static                          
-       ___return_lbl00002   0x00085a    program     static                          
-              Delay1KTCYx   0x00085c    program     extern C:\MCC18\src\traditional\delays\d1ktcyx.asm
-                     D1Kx   0x000866    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-                    D1K_1   0x000868    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0010   0x00086c    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-        _D1KTCYXCODE_0016   0x000872    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
-            __zero_memory   0x00087c    program     extern C:\MCC18\src\traditional\proc\p18F4620.asm
-                   loop_h   0x00088a    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
-               zero_block   0x00088a    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
-                compare_l   0x000892    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
-                   loop_l   0x000894    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
-                 _startup   0x00089c    program     extern C:\MCC18\src\traditional\startup\c018i.c
-                     loop   0x0008ac    program     static                          
-       ___return_lbl00001   0x0008b6    program     static                          
-             Delay100TCYx   0x0008b8    program     extern C:\MCC18\src\traditional\delays\d100tcyx.asm
-       _D100TCYXCODE_0008   0x0008c0    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
-                    D100x   0x0008c4    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
-                   D100_1   0x0008c6    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
-       _D100TCYXCODE_0012   0x0008ca    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
-       _D100TCYXCODE_0018   0x0008d0    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
-                   __init   0x0008d4    program     extern C:\MCC18\src\traditional\stdclib\__init.c
+                    track   0x0000c6    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                   InitAD   0x0001d2    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                ConvertAD   0x00023e    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+           adjust_forward   0x0002fc    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                  forward   0x0004c0    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+               next_pulse   0x00058c    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+               last_pulse   0x0005f2    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                  reverse   0x000658    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                turnright   0x00069a    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                 turnleft   0x000730    program     extern C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\fronttest.c
+                _do_cinit   0x0007c6    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                     test   0x0007e0    program     static                          
+                copy_loop   0x000838    program     static                          
+            copy_one_byte   0x00083e    program     static                          
+             done_copying   0x00084c    program     static                          
+                     done   0x000862    program     static                          
+       ___return_lbl00002   0x000862    program     static                          
+              Delay1KTCYx   0x000864    program     extern C:\MCC18\src\traditional\delays\d1ktcyx.asm
+                     D1Kx   0x00086e    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+                    D1K_1   0x000870    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0010   0x000874    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+        _D1KTCYXCODE_0016   0x00087a    program     static C:\MCC18\src\traditional\delays\d1ktcyx.asm
+            __zero_memory   0x000884    program     extern C:\MCC18\src\traditional\proc\p18F4620.asm
+                   loop_h   0x000892    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
+               zero_block   0x000892    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
+                compare_l   0x00089a    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
+                   loop_l   0x00089c    program     static C:\MCC18\src\traditional\proc\p18F4620.asm
+                 _startup   0x0008a4    program     extern C:\MCC18\src\traditional\startup\c018i.c
+                     loop   0x0008b4    program     static                          
+       ___return_lbl00001   0x0008be    program     static                          
+             Delay100TCYx   0x0008c0    program     extern C:\MCC18\src\traditional\delays\d100tcyx.asm
+       _D100TCYXCODE_0008   0x0008c8    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
+                    D100x   0x0008cc    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
+                   D100_1   0x0008ce    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
+       _D100TCYXCODE_0012   0x0008d2    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
+       _D100TCYXCODE_0018   0x0008d8    program     static C:\MCC18\src\traditional\delays\d100tcyx.asm
+                   __init   0x0008dc    program     extern C:\MCC18\src\traditional\stdclib\__init.c
                  __AARGB7   0x000000       data     extern C:\MCC18\src\traditional\math\aarg.asm
                   __REMB3   0x000000       data     extern C:\MCC18\src\traditional\math\aarg.asm
                  __AARGB6   0x000001       data     extern C:\MCC18\src\traditional\math\aarg.asm
