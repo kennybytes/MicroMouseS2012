@@ -4,14 +4,14 @@
 #define RIGHTSENSOR 1
 #define MIDDLESENSOR 2
 #define LEFTSENSOR 3
-#define OFFSETRIGHT 30
+#define OFFSETRIGHT 0
 #define OFFSETLEFT 0
 #define REPEAT 5
-#define DELAY 50
+#define DELAY 1
 #define DELAYTURN 25
 #define TURNRIGHT 83
 #define TURNLEFT 83
-#define OPTIMAL 481
+#define OPTIMAL 200
 
 /*
  *
@@ -35,6 +35,7 @@ void reverse(void);
 void turnright(int steps);
 void turnleft(int steps);
 void track(void);
+void tracky(void);
 int next_pulse(int current);
 int last_pulse(int current);
 int current_pulse_right = RED;
@@ -53,10 +54,10 @@ void main(void)
 	PORTD = 0b00000001;
 
 
-
 while(1)
 {
-	track();
+	tracky();
+
 
 	while(1)
 	{
@@ -69,11 +70,11 @@ while(1)
 		InitAD(LEFTSENSOR);
  		left = ConvertAD();
 
-
 		if(right<300) // check if front is greater than one square but less than two away from wall
 		{
+
 			//Delay10KTCYx(10);
-			forward(20,1,1);
+//			forward(20,1,1);
 		}
 		else
 		{	
@@ -91,9 +92,104 @@ while(1)
 
 }
 
+void tracky(void)
+{
+	int sum = 0;
+
+	int i = 0;
+
+	int right = 0;
+	int left = 0;
+	int front= 0;
+	
+	int error = 0;
+
+	while(1)
+	{
+	  InitAD(MIDDLESENSOR);
+	  front=ConvertAD();
+	  if(front<500)
+	  {
+	  for(i=0;i<5;i++)
+	  {
+		Delay1KTCYx(10);
+		InitAD(RIGHTSENSOR);
+ 		right = ConvertAD() + OFFSETRIGHT;
+		if(right<OPTIMAL) right=200;
+		InitAD(LEFTSENSOR);
+		left = ConvertAD() + OFFSETLEFT;
+		if(left<OPTIMAL) left=200;
+	
+		error = (right - left);
+		sum = sum + error;
+		forward(1,1,1);
+	  }
+		sum = sum/5;
+		//	if motor is tilted towards right
+		if( sum < -25 )
+			
+		{	
+			forward(1,0,1);
+			sum = sum + 25;
+
+		}
+
+		//if motor is tilted towards left
+		if(sum > 25 )
+		{
+			forward(1,1,0);
+			sum = sum - 25;
+
+		}
+	  }
+	  else 
+	  { 
+		turnright(94);
+	  for(i=0;i<5;i++)
+	  {
+		Delay1KTCYx(10);
+		InitAD(RIGHTSENSOR);
+ 		right = ConvertAD() + OFFSETRIGHT;
+		if(right<OPTIMAL) right=200;
+		InitAD(LEFTSENSOR);
+		left = ConvertAD() + OFFSETLEFT;
+		if(left<OPTIMAL) left=200;
+	
+		error = (right - left);
+		sum = sum + error;
+		forward(1,1,1);
+	  
+		sum = sum;
+		//	if motor is tilted towards right
+		if( sum < -25 )
+			
+		{	
+			forward(1,0,1);
+			sum = sum + 25;
+
+		}
+
+		//if motor is tilted towards left
+		if(sum > 25 )
+		{
+			forward(1,1,0);
+			sum = sum - 25;
+
+		}
+	  }
+	  }
+	
+//		forward(1,1,1);
+
+	}
+}
+
+
 void track( void )
 {	
 	int sum = 0;
+
+	int i = 0;
 
 	int right = 0;
 	int left = 0;
@@ -102,7 +198,8 @@ void track( void )
 	int error = 0;
 	while(1)
 	{
-
+	  for(i=0;i<10;i++)
+	  {
 		Delay1KTCYx(10);
 		InitAD(RIGHTSENSOR);
  		right = ConvertAD() + OFFSETRIGHT;
@@ -112,7 +209,9 @@ void track( void )
 		
 		error = (right - left);
 		sum = sum + error;
-		
+		forward(1,1,1);
+	  }	
+		sum = sum/10;
 		//	if motor is tilted towards right
 		if( sum < -100 )
 			
@@ -136,23 +235,22 @@ void track( void )
 
 
 
-void InitAD( int sensor )
+void InitAD(int sensor)
 {
-	// Set Config Bits	
-/*
+	
+	/*
+	 * Example Config Bits
 	ADCON1 = 0b00000000;
 	ADCON0 = 0b00000101;
 	ADCON2 = 0b00110001;
-*/
-
-
-
-
+	
+	*/
 
 	switch(sensor)
 	{	
 
 		// AN11
+		// Right Sensor
 		case RIGHTSENSOR:
 
 			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
@@ -163,6 +261,7 @@ void InitAD( int sensor )
 			break;
 
 		// AN 9
+		// Middle Sensor
 		case MIDDLESENSOR:
 			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
 			ADCON2 = 0b00001000; //ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
@@ -171,31 +270,48 @@ void InitAD( int sensor )
 			break;
 
 		// AN 8 
+		// Left Sensor
 		case LEFTSENSOR:
 			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
 			ADCON2 = 0b00001000;//ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
 			ADCON0 = 0b00100001;//clear ADCON0 to select channel 0 (AN0)
 			ADCON0bits.ADON = 0x01;//Enable A/D module
 			break;
+
+
 		default:
 			break;
 	}
 
 }
 
+
+
+
 int ConvertAD(void)
 {
+
 	int output = 0;
 	int temp1 = 0;
 	int temp2 = 0;
 
+	// GO 
 	ADCON0bits.GO_DONE = 1;
+
+	// Wait until A/D is done
 	while(ADCON0bits.GO_DONE != 0);
-	output = ADRESH;
-	temp1 = output << 2;
-		temp2 = ADRESL >> 6;
+
+
+	// Shift our output into a 10 bit int
+	temp1 = ADRESH << 2;
+	temp2 = ADRESL >> 6;
 	output = temp1 + temp2;		
+
+
 	return output;
+
+
+
 }
 
 
