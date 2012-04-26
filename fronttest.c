@@ -13,13 +13,6 @@
 #define TURNLEFT 83
 #define OPTIMAL 200
 
-/*
- *
-#define YELLOW 0x01
-#define GREEN 0x02
-#define BLUE 0x04
-#define RED 0x08
-*/
 
 #define YELLOW 0x08
 #define GREEN 0x04
@@ -41,22 +34,42 @@ int last_pulse(int current);
 int current_pulse_right = RED;
 int current_pulse_left = RED;
 
+
+
 void main(void)
 
 {
 	int front, left, right;
-
-	TRISA = 0x00;	// left motor
-	TRISB = 0b11111111;
-	TRISC = 0x00;	// right motor
+	// Set inputs and outputs
+	
+	TRISA = 0x00;		// left motor
+	TRISB = 0b11111111;	// Analog inputs (set all as input)
+	TRISC = 0x00;		// right motor
 	TRISD = 0x00;
+
 	//TRISE = 0x00;
 	PORTD = 0b00000001;
-
+	
 
 while(1)
 {
-	tracky();
+
+
+	InitAD(RIGHTSENSOR);
+	front = ConvertAD();
+	
+	while(1) 
+	{	
+		if( front < 500 ) 
+			track();
+	
+		InitAD(MIDDLESENSOR);
+		front = ConvertAD();
+	}
+	
+
+
+
 
 
 	while(1)
@@ -106,41 +119,49 @@ void tracky(void)
 
 	while(1)
 	{
-	  InitAD(MIDDLESENSOR);
-	  front=ConvertAD();
-	  if(front<500)
-	  {
-	  for(i=0;i<5;i++)
-	  {
-		Delay1KTCYx(10);
-		InitAD(RIGHTSENSOR);
- 		right = ConvertAD() + OFFSETRIGHT;
-		if(right<OPTIMAL) right=200;
-		InitAD(LEFTSENSOR);
-		left = ConvertAD() + OFFSETLEFT;
-		if(left<OPTIMAL) left=200;
+		InitAD(MIDDLESENSOR);
+	  	front=ConvertAD();
+		
+		// If there is still space in the front
+	  	if(front<500)
+	  	{
+			// Keep Moving Forward and tracking
+	  		for(i=0;i<5;i++)
+	  		{
+	  		      Delay1KTCYx(10);
+	  		      InitAD(RIGHTSENSOR);
+ 	  		      right = ConvertAD() + OFFSETRIGHT;
+	  		      if(right<OPTIMAL) right=200;
+	  		      InitAD(LEFTSENSOR);
+	  		      left = ConvertAD() + OFFSETLEFT;
+	  		      if(left<OPTIMAL) left=200;
 	
-		error = (right - left);
-		sum = sum + error;
-		forward(1,1,1);
-	  }
-		sum = sum/5;
-		//	if motor is tilted towards right
-		if( sum < -25 )
+	  		      error = (right - left);
+	  		      sum = sum + error;
+	  		      forward(1,1,1);
+	  		}
+
+			// Divide the sum by 5????
+			sum = sum/5;
 			
-		{	
-			forward(1,0,1);
-			sum = sum + 25;
 
-		}
+			// if mouse is tilted towards right
+			if( sum < -25 )
+			{	
+				forward(1,0,1);
+				sum = sum + 25;
 
-		//if motor is tilted towards left
-		if(sum > 25 )
-		{
-			forward(1,1,0);
-			sum = sum - 25;
+			}
 
-		}
+			// if mouse is tilted towards left
+			if(sum > 25 )
+			{
+				forward(1,1,0);
+				sum = sum - 25;
+
+			}
+
+
 	  }
 	  else 
 	  { 
@@ -196,41 +217,50 @@ void track( void )
 	int front= 0;
 	
 	int error = 0;
-	while(1)
+
+
+	// Keep Moving Forward and tracking
+	for(i=0;i<5;i++)
 	{
-	  for(i=0;i<10;i++)
-	  {
-		Delay1KTCYx(10);
-		InitAD(RIGHTSENSOR);
- 		right = ConvertAD() + OFFSETRIGHT;
+  		Delay1KTCYx(10);
+	  	InitAD(RIGHTSENSOR);
+ 	  	right = ConvertAD() + OFFSETRIGHT;
+	  	if(right<OPTIMAL) right=200;
 
-		InitAD(LEFTSENSOR);
-		left = ConvertAD() + OFFSETLEFT;
-		
+	  	InitAD(LEFTSENSOR);
+	  	left = ConvertAD() + OFFSETLEFT;
+	  	if(left<OPTIMAL) left=200;
+
+
 		error = (right - left);
-		sum = sum + error;
-		forward(1,1,1);
-	  }	
-		sum = sum/10;
-		//	if motor is tilted towards right
-		if( sum < -100 )
+	 	sum = sum + error;
+
+	  	forward(1,1,1);
+	 
+	}
+
+	// Divide the sum by 5????
+	sum = sum/5;
 			
-		{	
-			forward(1,0,1) ;
-			sum = sum + 100;
 
-		}
-
-		//if motor is tilted towards left
-		if(sum > 100 )
-		{
-			forward(1,1,0);
-			sum = sum - 100;
-
-		}
-		forward(1,1,1);
+	// if mouse is tilted towards right
+	if( sum < -25 )
+	{	
+		forward(1,0,1);
+		sum = sum + 25;
 
 	}
+
+	// if mouse is tilted towards left
+	if(sum > 25 )
+	{
+		forward(1,1,0);
+		sum = sum - 25;
+
+	}
+
+
+
 }
 
 
@@ -311,72 +341,13 @@ int ConvertAD(void)
 	return output;
 
 
-
 }
 
 
 
-void adjust_forward(int times)
-{
-		int i, left, right;
-
-		for(i=0;i<times;i++)
-		{
-			InitAD(LEFTSENSOR);
-			left = ConvertAD();
-			InitAD(RIGHTSENSOR);
-			right = ConvertAD();
-//		  if(left>OPTIMAL && right>OPTIMAL)
-		  {
-			if(left<right)
-			{
-				current_pulse_left = next_pulse(current_pulse_left);
-				PORTA = current_pulse_left;
-				Delay100TCYx(DELAY);
-//				current_pulse_right = next_pulse(current_pulse_right);
-//				PORTC = current_pulse_right;
-//				Delay100TCYx(DELAY);
-				current_pulse_left = next_pulse(current_pulse_left);
-				PORTA = current_pulse_left;
-				Delay100TCYx(DELAY);
-			}
-			if(right<left)
-			{
-				current_pulse_right = next_pulse(current_pulse_right);
-				PORTC = current_pulse_right;
-				Delay100TCYx(DELAY);
-//				current_pulse_left = next_pulse(current_pulse_left);
-//				PORTA = current_pulse_left;
-//				Delay100TCYx(DELAY);
-				current_pulse_right = next_pulse(current_pulse_right);
-				PORTC = current_pulse_right;
-				Delay100TCYx(DELAY);
-			}
-			else
-			{
-			current_pulse_right = next_pulse(current_pulse_right);
-			PORTC = current_pulse_right;
-			Delay100TCYx(DELAY);
-			current_pulse_left = next_pulse(current_pulse_left);
-			PORTA = current_pulse_left;
-			Delay100TCYx(DELAY);
-			}
-		  }
-//		  else
-//		  {
-//			current_pulse_right = next_pulse(current_pulse_right);
-//			PORTC = current_pulse_right;
-//			Delay100TCYx(DELAY);
-//			current_pulse_left = next_pulse(current_pulse_left);
-//			PORTA = current_pulse_left;
-//			Delay100TCYx(DELAY);
-//		  }
-		}
-}
 
 void forward(int times, int pulse_right, int pulse_left)
 {		
-	
 		
 		int i;
 		int old_pulse =0;
@@ -468,9 +439,8 @@ int last_pulse(int current)
 }
 
 void reverse(void) // moves the mouse approx 1/8 of a square forward
-{
-//	int i;
 
+{
 		PORTA = BLUE;
 		PORTC = BLUE;
 		Delay100TCYx(DELAY);
@@ -495,27 +465,32 @@ void turnright(int steps)
 
 		current_pulse_right = last_pulse(current_pulse_right);
 		PORTC = current_pulse_right;
+		
 		current_pulse_left = next_pulse(current_pulse_left);
 		PORTA = current_pulse_left;
+
 		Delay1KTCYx(DELAYTURN);
 
-/*
-	PORTA = BLUE;
-	PORTC = RED;
-	Delay1KTCYx(DELAY);
-	
-	PORTA = GREEN;
-	PORTC = YELLOW;
-	Delay1KTCYx(DELAY);
-	
-	PORTA = YELLOW;
-	PORTC = GREEN;
-	Delay1KTCYx(DELAY);
+		/*
+		 * OUTDATED Turn
+		PORTA = BLUE;
+		PORTC = RED;
+		Delay1KTCYx(DELAY);
+		
+		PORTA = GREEN;
+		PORTC = YELLOW;
+		Delay1KTCYx(DELAY);
+		
+		PORTA = YELLOW;
+		PORTC = GREEN;
+		Delay1KTCYx(DELAY);
 
-	PORTA = RED;	
-	PORTC = BLUE;
-	Delay1KTCYx(DELAY);
-*/
+		PORTA = RED;	
+		PORTC = BLUE;
+		Delay1KTCYx(DELAY);
+		*
+		*/
+
 	}
 }
 
@@ -528,26 +503,29 @@ void turnleft(int steps)
 
 		current_pulse_left = last_pulse(current_pulse_left);
 		PORTA = current_pulse_left;
+
 		current_pulse_right = next_pulse(current_pulse_right);
 		PORTC = current_pulse_right;
+
 		Delay1KTCYx(DELAYTURN);
 
-/*
-	PORTC = BLUE;
-	PORTA = RED;
-	Delay1KTCYx(DELAY);
-	
-	PORTC = GREEN;
-	PORTA = YELLOW;
-	Delay1KTCYx(DELAY);
-	
-	PORTC = YELLOW;
-	PORTA = GREEN;
-	Delay1KTCYx(DELAY);
+		/*
+		PORTC = BLUE;
+		PORTA = RED;
+		Delay1KTCYx(DELAY);
+		
+		PORTC = GREEN;
+		PORTA = YELLOW;
+		Delay1KTCYx(DELAY);
+		
+		PORTC = YELLOW;
+		PORTA = GREEN;
+		Delay1KTCYx(DELAY);
 
-	PORTC = RED;	
-	PORTA = BLUE;
-	Delay1KTCYx(DELAY);
-*/
+		PORTC = RED;	
+		PORTA = BLUE;
+		Delay1KTCYx(DELAY);
+		*/
+	
 	}
 }
