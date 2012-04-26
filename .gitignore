@@ -3,6 +3,7 @@
 *.mcs
 *.cof
 *.map
+*.hex
 *.o
 *~
 
