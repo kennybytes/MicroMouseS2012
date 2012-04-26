@@ -8,9 +8,10 @@
 #define OFFSETLEFT 0
 #define REPEAT 5
 #define DELAY 1
-#define DELAYTURN 25
+#define DELAYTURN 180
 #define TURNRIGHT 83
 #define TURNLEFT 83
+#define TURNSTEP 85
 #define OPTIMAL 200
 
 
@@ -25,9 +26,10 @@ int ConvertAD(void);
 void forward(int times, int pulse_right, int pulse_left);
 void adjust_forward(int times);
 void reverse(void);
+void forward(int times, int pulse_right, int pulse_left);
 void turnright(int steps);
 void turnleft(int steps);
-void track(void);
+void track(int number_of_steps, int correct_divisor);
 void tracky(void);
 int next_pulse(int current);
 int last_pulse(int current);
@@ -51,186 +53,105 @@ void main(void)
 	PORTD = 0b00000001;
 	
 
-while(1)
-{
-
-
-	InitAD(RIGHTSENSOR);
-	front = ConvertAD();
-	
-	while(1) 
-	{	
-		if( front < 500 ) 
-			track();
+	while(1)
+	{
 	
 		InitAD(MIDDLESENSOR);
 		front = ConvertAD();
-	}
-	
-
-
-
-
-
-	while(1)
-	{
-		InitAD(MIDDLESENSOR);
- 		front = ConvertAD();
-
+		
 		InitAD(RIGHTSENSOR);
- 		right = ConvertAD();
-
+		right = ConvertAD();
+	
 		InitAD(LEFTSENSOR);
- 		left = ConvertAD();
-
-		if(right<300) // check if front is greater than one square but less than two away from wall
-		{
-
-			//Delay10KTCYx(10);
-//			forward(20,1,1);
-		}
-		else
+		left = ConvertAD();
+	
+		while(1) 
 		{	
-		
-		}
-
-
-	}
-
-
-
-
-}
-
-
-}
-
-void tracky(void)
-{
-	int sum = 0;
-
-	int i = 0;
-
-	int right = 0;
-	int left = 0;
-	int front= 0;
-	
-	int error = 0;
-
-	while(1)
-	{
-		InitAD(MIDDLESENSOR);
-	  	front=ConvertAD();
-		
-		// If there is still space in the front
-	  	if(front<500)
-	  	{
-			// Keep Moving Forward and tracking
-	  		for(i=0;i<5;i++)
-	  		{
-	  		      Delay1KTCYx(10);
-	  		      InitAD(RIGHTSENSOR);
- 	  		      right = ConvertAD() + OFFSETRIGHT;
-	  		      if(right<OPTIMAL) right=200;
-	  		      InitAD(LEFTSENSOR);
-	  		      left = ConvertAD() + OFFSETLEFT;
-	  		      if(left<OPTIMAL) left=200;
-	
-	  		      error = (right - left);
-	  		      sum = sum + error;
-	  		      forward(1,1,1);
-	  		}
-
-			// Divide the sum by 5????
-			sum = sum/5;
-			
-
-			// if mouse is tilted towards right
-			if( sum < -25 )
-			{	
-				forward(1,0,1);
-				sum = sum + 25;
-
-			}
-
-			// if mouse is tilted towards left
-			if(sum > 25 )
+			if( front < 500 ) 
 			{
-				forward(1,1,0);
-				sum = sum - 25;
-
+				track(5, 5);
+			}
+				
+			else
+			{
+				turnright(TURNSTEP);
+				
+				if( front < 500 )
+				{
+					track(10, 1);
+				}
+	
 			}
 
+			if( front < 500 ) 
+			{                           		
+				track(5, 5);        		
+			}                           		
+				                    		
+			else                        		
+			{                           		
+				turnleft(TURNSTEP);		
+				                    		
+				if( front < 500 )   		
+        			{
+        				track(5, 1);
+        			}
+        		                             
+        		}
 
-	  }
-	  else 
-	  { 
-		turnright(94);
-	  for(i=0;i<5;i++)
-	  {
-		Delay1KTCYx(10);
-		InitAD(RIGHTSENSOR);
- 		right = ConvertAD() + OFFSETRIGHT;
-		if(right<OPTIMAL) right=200;
-		InitAD(LEFTSENSOR);
-		left = ConvertAD() + OFFSETLEFT;
-		if(left<OPTIMAL) left=200;
+			InitAD(MIDDLESENSOR);
+			front = ConvertAD();
 	
-		error = (right - left);
-		sum = sum + error;
-		forward(1,1,1);
-	  
-		sum = sum;
-		//	if motor is tilted towards right
-		if( sum < -25 )
-			
-		{	
-			forward(1,0,1);
-			sum = sum + 25;
-
 		}
-
-		//if motor is tilted towards left
-		if(sum > 25 )
-		{
-			forward(1,1,0);
-			sum = sum - 25;
-
-		}
-	  }
-	  }
+		
 	
-//		forward(1,1,1);
-
+	
+	
 	}
+
 }
 
 
-void track( void )
+
+void track( int number_of_steps , int correct_divisor)
 {	
 	int sum = 0;
-
 	int i = 0;
-
 	int right = 0;
 	int left = 0;
 	int front= 0;
 	
 	int error = 0;
 
-
+	int NOWALL = 0;
 	// Keep Moving Forward and tracking
 	for(i=0;i<5;i++)
 	{
   		Delay1KTCYx(10);
 	  	InitAD(RIGHTSENSOR);
  	  	right = ConvertAD() + OFFSETRIGHT;
-	  	if(right<OPTIMAL) right=200;
+	  	if(right<OPTIMAL) 
+		{
+			NOWALL= 1;
+			right=200;
+		}
+		else
+		{
+			NOWALL = 0;
+		}
 
 	  	InitAD(LEFTSENSOR);
 	  	left = ConvertAD() + OFFSETLEFT;
-	  	if(left<OPTIMAL) left=200;
-
+	  	if(left<OPTIMAL) 
+		{
+			NOWALL = 1;
+			left=200;
+		}
+		else
+		{
+			NOWALL = 0;
+		}
+		
 
 		error = (right - left);
 	 	sum = sum + error;
@@ -239,8 +160,8 @@ void track( void )
 	 
 	}
 
-	// Divide the sum by 5????
-	sum = sum/5;
+	// Divide the sum by 5 ( for the amount of steps we've done )
+	sum = sum/correct_divisor;
 			
 
 	// if mouse is tilted towards right
@@ -258,7 +179,6 @@ void track( void )
 		sum = sum - 25;
 
 	}
-
 
 
 }
@@ -316,8 +236,6 @@ void InitAD(int sensor)
 }
 
 
-
-
 int ConvertAD(void)
 {
 
@@ -331,9 +249,9 @@ int ConvertAD(void)
 	// Wait until A/D is done
 	while(ADCON0bits.GO_DONE != 0);
 
-
+	output = ADRESH;
 	// Shift our output into a 10 bit int
-	temp1 = ADRESH << 2;
+	temp1 = output << 2;
 	temp2 = ADRESL >> 6;
 	output = temp1 + temp2;		
 
@@ -345,9 +263,9 @@ int ConvertAD(void)
 
 
 
-
 void forward(int times, int pulse_right, int pulse_left)
 {		
+	
 		
 		int i;
 		int old_pulse =0;
@@ -402,6 +320,14 @@ void forward(int times, int pulse_right, int pulse_left)
 
 }
 
+
+
+
+
+
+
+
+
 int next_pulse(int current)
 {
 
@@ -438,24 +364,6 @@ int last_pulse(int current)
 	}
 }
 
-void reverse(void) // moves the mouse approx 1/8 of a square forward
-
-{
-		PORTA = BLUE;
-		PORTC = BLUE;
-		Delay100TCYx(DELAY);
-		PORTA = GREEN;
-		PORTC = GREEN;
-		Delay100TCYx(DELAY);
-		PORTA = YELLOW;
-		PORTC = YELLOW;
-		Delay100TCYx(DELAY);
-		PORTA = RED;
-		PORTC = RED;
-		Delay100TCYx(DELAY);
-
-}
-
 
 void turnright(int steps)
 {	
@@ -469,7 +377,7 @@ void turnright(int steps)
 		current_pulse_left = next_pulse(current_pulse_left);
 		PORTA = current_pulse_left;
 
-		Delay1KTCYx(DELAYTURN);
+		Delay100TCYx(DELAYTURN);
 
 		/*
 		 * OUTDATED Turn
@@ -507,7 +415,7 @@ void turnleft(int steps)
 		current_pulse_right = next_pulse(current_pulse_right);
 		PORTC = current_pulse_right;
 
-		Delay1KTCYx(DELAYTURN);
+		Delay10TCYx(DELAYTURN);
 
 		/*
 		PORTC = BLUE;
