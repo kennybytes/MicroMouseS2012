@@ -13,11 +13,18 @@
 #define TURNLEFT 83
 #define OPTIMAL 481
 
-
+/*
+ *
 #define YELLOW 0x01
 #define GREEN 0x02
 #define BLUE 0x04
 #define RED 0x08
+*/
+
+#define YELLOW 0x08
+#define GREEN 0x04
+#define BLUE 0x02
+#define RED 0x01
 
 
 void InitAD(int sensor);
@@ -49,9 +56,10 @@ void main(void)
 
 while(1)
 {
+	track();
+
 	while(1)
 	{
-
 		InitAD(MIDDLESENSOR);
  		front = ConvertAD();
 
@@ -90,32 +98,38 @@ void track( void )
 	int right = 0;
 	int left = 0;
 	int front= 0;
-
+	
+	int error = 0;
 	while(1)
 	{
 
+		Delay1KTCYx(10);
 		InitAD(RIGHTSENSOR);
  		right = ConvertAD() + OFFSETRIGHT;
+
 		InitAD(LEFTSENSOR);
 		left = ConvertAD() + OFFSETLEFT;
-		sum = sum + (right - left);
 		
-		
+		error = (right - left);
+		sum = sum + error;
 		
 		//	if motor is tilted towards right
-
-		if( sum < 0 )
-		{	
+		if( sum < -100 )
 			
+		{	
 			forward(1,0,1) ;
+			sum = sum + 100;
 
 		}
+
 		//if motor is tilted towards left
-		if(sum > 0 )
+		if(sum > 100 )
 		{
 			forward(1,1,0);
+			sum = sum - 100;
 
 		}
+		forward(1,1,1);
 
 	}
 }
@@ -130,6 +144,10 @@ void InitAD( int sensor )
 	ADCON0 = 0b00000101;
 	ADCON2 = 0b00110001;
 */
+
+
+
+
 
 	switch(sensor)
 	{	
