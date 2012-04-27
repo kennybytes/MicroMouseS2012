@@ -3,9 +3,9 @@
 
 #include "atod.h"
 
-#define RIGHTSENSOR 1
-#define MIDDLESENSOR 2
-#define LEFTSENSOR 3
+
+
+
 
 #define OFFSETRIGHT 0
 #define OFFSETLEFT 0
@@ -55,22 +55,24 @@ void main(void)
 	PORTD = 0b00000001;
 	
 
-while(1)
-{
-
-
-	InitAD(RIGHTSENSOR);
-	front = ConvertAD();
+	while(1)
+	{
 	
-	while(1) 
-	{	
-		if( front < 500 ) 
-			track();
-		InitAD(MIDDLESENSOR);
+	
+		InitAD(RIGHTSENSOR);
 		front = ConvertAD();
+		
+		while(1) 
+		{	
+			if( front < 500 ) 
+				track();
+			InitAD(MIDDLESENSOR);
+			front = ConvertAD();
+		}
+	
 	}
-
 }
+
 
 
 void track( void )
