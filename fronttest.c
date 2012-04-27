@@ -103,105 +103,6 @@ while(1)
 
 }
 
-void tracky(void)
-{
-	int sum = 0;
-
-	int i = 0;
-
-	int right = 0;
-	int left = 0;
-	int front= 0;
-	
-	int error = 0;
-
-	while(1)
-	{
-		InitAD(MIDDLESENSOR);
-	  	front=ConvertAD();
-		
-		// If there is still space in the front
-	  	if(front<500)
-	  	{
-			// Keep Moving Forward and tracking
-	  		for(i=0;i<5;i++)
-	  		{
-	  		      Delay1KTCYx(10);
-	  		      InitAD(RIGHTSENSOR);
- 	  		      right = ConvertAD() + OFFSETRIGHT;
-	  		      if(right<OPTIMAL) right=200;
-	  		      InitAD(LEFTSENSOR);
-	  		      left = ConvertAD() + OFFSETLEFT;
-	  		      if(left<OPTIMAL) left=200;
-	
-	  		      error = (right - left);
-	  		      sum = sum + error;
-	  		      forward(1,1,1);
-	  		}
-
-			// Divide the sum by 5????
-			sum = sum/5;
-			
-
-			// if mouse is tilted towards right
-			if( sum < -25 )
-			{	
-				forward(1,0,1);
-				sum = sum + 25;
-
-			}
-
-			// if mouse is tilted towards left
-			if(sum > 25 )
-			{
-				forward(1,1,0);
-				sum = sum - 25;
-
-			}
-
-
-	  }
-	  else 
-	  { 
-		turnright(94);
-	  for(i=0;i<5;i++)
-	  {
-		Delay1KTCYx(10);
-		InitAD(RIGHTSENSOR);
- 		right = ConvertAD() + OFFSETRIGHT;
-		if(right<OPTIMAL) right=200;
-		InitAD(LEFTSENSOR);
-		left = ConvertAD() + OFFSETLEFT;
-		if(left<OPTIMAL) left=200;
-	
-		error = (right - left);
-		sum = sum + error;
-		forward(1,1,1);
-	  
-		sum = sum;
-		//	if motor is tilted towards right
-		if( sum < -25 )
-			
-		{	
-			forward(1,0,1);
-			sum = sum + 25;
-
-		}
-
-		//if motor is tilted towards left
-		if(sum > 25 )
-		{
-			forward(1,1,0);
-			sum = sum - 25;
-
-		}
-	  }
-	  }
-	
-//		forward(1,1,1);
-
-	}
-}
 
 
 void track( void )
@@ -260,7 +161,13 @@ void track( void )
 
 
 }
-
+/*
+ *
+ *
+ * Analog to digital conversion
+ *
+ *
+ */
 
 
 void InitAD(int sensor)
@@ -310,7 +217,6 @@ void InitAD(int sensor)
 		default:
 			break;
 	}
-
 }
 
 
@@ -340,6 +246,31 @@ int ConvertAD(void)
 
 
 }
+
+/*
+ *
+ *
+ * Linear Movement
+ *
+ *
+ */
+void reverse(void) 
+{
+		PORTA = BLUE;
+		PORTC = BLUE;
+		Delay100TCYx(DELAY);
+		PORTA = GREEN;
+		PORTC = GREEN;
+		Delay100TCYx(DELAY);
+		PORTA = YELLOW;
+		PORTC = YELLOW;
+		Delay100TCYx(DELAY);
+		PORTA = RED;
+		PORTC = RED;
+		Delay100TCYx(DELAY);
+}
+
+
 
 
 
@@ -400,6 +331,14 @@ void forward(int times, int pulse_right, int pulse_left)
 
 }
 
+
+/*
+ *
+ *
+ * Step Trackers
+ *
+ *
+ */
 int next_pulse(int current)
 {
 
@@ -418,7 +357,6 @@ int next_pulse(int current)
 	}
 
 }
-
 int last_pulse(int current)
 {
 	switch(current)
@@ -436,25 +374,29 @@ int last_pulse(int current)
 	}
 }
 
-void reverse(void) // moves the mouse approx 1/8 of a square forward
-
-{
-		PORTA = BLUE;
-		PORTC = BLUE;
-		Delay100TCYx(DELAY);
-		PORTA = GREEN;
-		PORTC = GREEN;
-		Delay100TCYx(DELAY);
-		PORTA = YELLOW;
-		PORTC = YELLOW;
-		Delay100TCYx(DELAY);
-		PORTA = RED;
-		PORTC = RED;
-		Delay100TCYx(DELAY);
-
-}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ *
+ *
+ *	Turning Functions
+ *
+ */
 void turnright(int steps)
 {	
 	int i;
