@@ -71,7 +71,6 @@ while(1)
 
 
 
-
 	while(1)
 	{
 		InitAD(MIDDLESENSOR);
@@ -96,7 +95,6 @@ while(1)
 
 
 	}
-
 
 
 
