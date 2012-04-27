@@ -62,46 +62,15 @@ while(1)
 	{	
 		if( front < 500 ) 
 			track();
-	
 		InitAD(MIDDLESENSOR);
 		front = ConvertAD();
 	}
 	
 
 
-
-
-	while(1)
-	{
-		InitAD(MIDDLESENSOR);
- 		front = ConvertAD();
-
-		InitAD(RIGHTSENSOR);
- 		right = ConvertAD();
-
-		InitAD(LEFTSENSOR);
- 		left = ConvertAD();
-
-		if(right<300) // check if front is greater than one square but less than two away from wall
-		{
-
-			//Delay10KTCYx(10);
-//			forward(20,1,1);
-		}
-		else
-		{	
-		
-		}
-
-
-	}
-
-
-
 }
 
 
-}
 
 
 
