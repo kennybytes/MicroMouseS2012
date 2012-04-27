@@ -1,18 +1,23 @@
 #include <p18f4620.h>
 #include <delays.h>
 
+#include "atod.h"
+
 #define RIGHTSENSOR 1
 #define MIDDLESENSOR 2
 #define LEFTSENSOR 3
+
 #define OFFSETRIGHT 0
 #define OFFSETLEFT 0
+
 #define REPEAT 5
 #define DELAY 1
 #define DELAYTURN 25
+
 #define TURNRIGHT 83
 #define TURNLEFT 83
-#define OPTIMAL 200
 
+#define OPTIMAL 200
 
 #define YELLOW 0x08
 #define GREEN 0x04
@@ -20,15 +25,14 @@
 #define RED 0x01
 
 
-void InitAD(int sensor);
-int ConvertAD(void);
+
 void forward(int times, int pulse_right, int pulse_left);
-void adjust_forward(int times);
 void reverse(void);
+
 void turnright(int steps);
 void turnleft(int steps);
 void track(void);
-void tracky(void);
+
 int next_pulse(int current);
 int last_pulse(int current);
 int current_pulse_right = RED;
@@ -65,29 +69,21 @@ while(1)
 		InitAD(MIDDLESENSOR);
 		front = ConvertAD();
 	}
-	
-
 
 }
-
-
-
 
 
 void track( void )
 {	
 	int sum = 0;
-
 	int i = 0;
-
 	int right = 0;
 	int left = 0;
 	int front= 0;
 	
 	int error = 0;
 
-
-	// Keep Moving Forward and tracking
+	// Move Forward and Track
 	for(i=0;i<5;i++)
 	{
   		Delay1KTCYx(10);
@@ -107,114 +103,25 @@ void track( void )
 	 
 	}
 
-	// Divide the sum by 5????
+	// Divide our error by 5 (how many steps we took)
 	sum = sum/5;
 			
 
 	// if mouse is tilted towards right
-	if( sum < -25 )
-	{	
+	if( sum < -25 ){	
 		forward(1,0,1);
 		sum = sum + 25;
-
 	}
 
 	// if mouse is tilted towards left
-	if(sum > 25 )
-	{
+	if(sum > 25 ){
 		forward(1,1,0);
 		sum = sum - 25;
-
 	}
 
 
-
-}
-/*
- *
- *
- * Analog to digital conversion
- *
- *
- */
-
-
-void InitAD(int sensor)
-{
-	
-	/*
-	 * Example Config Bits
-	ADCON1 = 0b00000000;
-	ADCON0 = 0b00000101;
-	ADCON2 = 0b00110001;
-	
-	*/
-
-	switch(sensor)
-	{	
-
-		// AN11
-		// Right Sensor
-		case RIGHTSENSOR:
-
-			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
-			ADCON2 = 0b00001000;//ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
-			ADCON0 = 0b00101101;//clear ADCON0 to select channel 0 (AN0)
-
-			ADCON0bits.ADON = 0x01;//Enable A/D module
-			break;
-
-		// AN 9
-		// Middle Sensor
-		case MIDDLESENSOR:
-			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
-			ADCON2 = 0b00001000; //ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
-			ADCON0 = 0b00100101;//clear ADCON0 to select channel 0 (AN0)
-			ADCON0bits.ADON = 0x01;//Enable A/D module
-			break;
-
-		// AN 8 
-		// Left Sensor
-		case LEFTSENSOR:
-			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
-			ADCON2 = 0b00001000;//ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
-			ADCON0 = 0b00100001;//clear ADCON0 to select channel 0 (AN0)
-			ADCON0bits.ADON = 0x01;//Enable A/D module
-			break;
-
-
-		default:
-			break;
-	}
 }
 
-
-
-
-int ConvertAD(void)
-{
-
-	int output = 0;
-	int temp1 = 0;
-	int temp2 = 0;
-
-	// GO 
-	ADCON0bits.GO_DONE = 1;
-
-	// Wait until A/D is done
-	while(ADCON0bits.GO_DONE != 0);
-
-
-	// Shift our output into a 10 bit int
-	temp1 = ADRESH << 2;
-	temp2 = ADRESL >> 6;
-	output = temp1 + temp2;		
-
-
-	return output;
-
-
-}
 
 /*
  *
