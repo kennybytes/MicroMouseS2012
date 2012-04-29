@@ -1,6 +1,4 @@
-#include <p18f4620.h>
-
-
+#include "atod.h"
 
 void InitAD(int sensor)
 {
@@ -20,6 +18,7 @@ void InitAD(int sensor)
 
 			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
 			ADCON2 = 0b00001000;//ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
+
 			ADCON0 = 0b00101101;//clear ADCON0 to select channel 0 (AN0)
 			ADCON0bits.ADON = 0x01;//Enable A/D module
 			break;
@@ -29,6 +28,7 @@ void InitAD(int sensor)
 		case MIDDLESENSOR:
 			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
 			ADCON2 = 0b00001000; //ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
+
 			ADCON0 = 0b00100101;//clear ADCON0 to select channel 0 (AN0)
 			ADCON0bits.ADON = 0x01;//Enable A/D module
 			break;
@@ -38,6 +38,7 @@ void InitAD(int sensor)
 		case LEFTSENSOR:
 			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
 			ADCON2 = 0b00001000;//ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
+
 			ADCON0 = 0b00100001;//clear ADCON0 to select channel 0 (AN0)
 			ADCON0bits.ADON = 0x01;//Enable A/D module
 			break;
@@ -45,8 +46,9 @@ void InitAD(int sensor)
 		default:
 			break;
 	}
-}
 
+
+}
 
 
 
