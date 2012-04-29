@@ -1,19 +1,19 @@
 #include <p18f4620.h>
 #include <delays.h>
 
-#define RIGHTSENSOR 1
-#define MIDDLESENSOR 2
-#define LEFTSENSOR 3
+#include "atod.h"
+
 #define OFFSETRIGHT 0
 #define OFFSETLEFT 0
+
 #define REPEAT 5
 #define DELAY 1
-#define DELAYTURN 180
+#define DELAYTURN 25
+
 #define TURNRIGHT 83
 #define TURNLEFT 83
-#define TURNSTEP 85
-#define OPTIMAL 200
 
+#define OPTIMAL 200
 
 #define YELLOW 0x08
 #define GREEN 0x04
@@ -21,16 +21,13 @@
 #define RED 0x01
 
 
-void InitAD(int sensor);
-int ConvertAD(void);
 void forward(int times, int pulse_right, int pulse_left);
-void adjust_forward(int times);
 void reverse(void);
-void forward(int times, int pulse_right, int pulse_left);
+
 void turnright(int steps);
 void turnleft(int steps);
-void track(int number_of_steps, int correct_divisor);
-void tracky(void);
+void track(void);
+
 int next_pulse(int current);
 int last_pulse(int current);
 int current_pulse_right = RED;
@@ -56,64 +53,24 @@ void main(void)
 	while(1)
 	{
 	
-		InitAD(MIDDLESENSOR);
+	
+		InitAD(RIGHTSENSOR);
 		front = ConvertAD();
 		
-		InitAD(RIGHTSENSOR);
-		right = ConvertAD();
-	
-		InitAD(LEFTSENSOR);
-		left = ConvertAD();
-	
 		while(1) 
 		{	
 			if( front < 500 ) 
-			{
-				track(5, 5);
-			}
-				
-			else
-			{
-				turnright(TURNSTEP);
-				
-				if( front < 500 )
-				{
-					track(10, 1);
-				}
-	
-			}
-
-			if( front < 500 ) 
-			{                           		
-				track(5, 5);        		
-			}                           		
-				                    		
-			else                        		
-			{                           		
-				turnleft(TURNSTEP);		
-				                    		
-				if( front < 500 )   		
-        			{
-        				track(5, 1);
-        			}
-        		                             
-        		}
-
+				track();
 			InitAD(MIDDLESENSOR);
 			front = ConvertAD();
-	
 		}
-		
-	
-	
 	
 	}
-
 }
 
 
 
-void track( int number_of_steps , int correct_divisor)
+void track( void )
 {	
 	int sum = 0;
 	int i = 0;
@@ -123,35 +80,18 @@ void track( int number_of_steps , int correct_divisor)
 	
 	int error = 0;
 
-	int NOWALL = 0;
-	// Keep Moving Forward and tracking
+	// Move Forward and Track
 	for(i=0;i<5;i++)
 	{
   		Delay1KTCYx(10);
 	  	InitAD(RIGHTSENSOR);
  	  	right = ConvertAD() + OFFSETRIGHT;
-	  	if(right<OPTIMAL) 
-		{
-			NOWALL= 1;
-			right=200;
-		}
-		else
-		{
-			NOWALL = 0;
-		}
+	  	if(right<OPTIMAL) right=200;
 
 	  	InitAD(LEFTSENSOR);
 	  	left = ConvertAD() + OFFSETLEFT;
-	  	if(left<OPTIMAL) 
-		{
-			NOWALL = 1;
-			left=200;
-		}
-		else
-		{
-			NOWALL = 0;
-		}
-		
+	  	if(left<OPTIMAL) left=200;
+
 
 		error = (right - left);
 	 	sum = sum + error;
@@ -160,112 +100,56 @@ void track( int number_of_steps , int correct_divisor)
 	 
 	}
 
-	// Divide the sum by 5 ( for the amount of steps we've done )
-	sum = sum/correct_divisor;
+	// Divide our error by 5 (how many steps we took)
+	sum = sum/5;
 			
 
 	// if mouse is tilted towards right
-	if( sum < -25 )
-	{	
+	if( sum < -25 ){	
 		forward(1,0,1);
 		sum = sum + 25;
-
 	}
 
 	// if mouse is tilted towards left
-	if(sum > 25 )
-	{
+	if(sum > 25 ){
 		forward(1,1,0);
 		sum = sum - 25;
-
 	}
 
 
 }
 
 
-
-void InitAD(int sensor)
+/*
+ *
+ *
+ * Linear Movement
+ *
+ *
+ */
+void reverse(void) 
 {
-	
-	/*
-	 * Example Config Bits
-	ADCON1 = 0b00000000;
-	ADCON0 = 0b00000101;
-	ADCON2 = 0b00110001;
-	
-	*/
-
-	switch(sensor)
-	{	
-
-		// AN11
-		// Right Sensor
-		case RIGHTSENSOR:
-
-			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
-			ADCON2 = 0b00001000;//ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
-			ADCON0 = 0b00101101;//clear ADCON0 to select channel 0 (AN0)
-
-			ADCON0bits.ADON = 0x01;//Enable A/D module
-			break;
-
-		// AN 9
-		// Middle Sensor
-		case MIDDLESENSOR:
-			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
-			ADCON2 = 0b00001000; //ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
-			ADCON0 = 0b00100101;//clear ADCON0 to select channel 0 (AN0)
-			ADCON0bits.ADON = 0x01;//Enable A/D module
-			break;
-
-		// AN 8 
-		// Left Sensor
-		case LEFTSENSOR:
-			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
-			ADCON2 = 0b00001000;//ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
-			ADCON0 = 0b00100001;//clear ADCON0 to select channel 0 (AN0)
-			ADCON0bits.ADON = 0x01;//Enable A/D module
-			break;
-
-
-		default:
-			break;
-	}
-
+		PORTA = BLUE;
+		PORTC = BLUE;
+		Delay100TCYx(DELAY);
+		PORTA = GREEN;
+		PORTC = GREEN;
+		Delay100TCYx(DELAY);
+		PORTA = YELLOW;
+		PORTC = YELLOW;
+		Delay100TCYx(DELAY);
+		PORTA = RED;
+		PORTC = RED;
+		Delay100TCYx(DELAY);
 }
 
 
-int ConvertAD(void)
-{
 
-	int output = 0;
-	int temp1 = 0;
-	int temp2 = 0;
-
-	// GO 
-	ADCON0bits.GO_DONE = 1;
-
-	// Wait until A/D is done
-	while(ADCON0bits.GO_DONE != 0);
-
-	output = ADRESH;
-	// Shift our output into a 10 bit int
-	temp1 = output << 2;
-	temp2 = ADRESL >> 6;
-	output = temp1 + temp2;		
-
-
-	return output;
-
-
-}
 
 
 
 void forward(int times, int pulse_right, int pulse_left)
 {		
-	
 		
 		int i;
 		int old_pulse =0;
@@ -321,13 +205,13 @@ void forward(int times, int pulse_right, int pulse_left)
 }
 
 
-
-
-
-
-
-
-
+/*
+ *
+ *
+ * Step Trackers
+ *
+ *
+ */
 int next_pulse(int current)
 {
 
@@ -346,7 +230,6 @@ int next_pulse(int current)
 	}
 
 }
-
 int last_pulse(int current)
 {
 	switch(current)
@@ -365,6 +248,28 @@ int last_pulse(int current)
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ *
+ *
+ *	Turning Functions
+ *
+ */
 void turnright(int steps)
 {	
 	int i;
@@ -377,7 +282,7 @@ void turnright(int steps)
 		current_pulse_left = next_pulse(current_pulse_left);
 		PORTA = current_pulse_left;
 
-		Delay100TCYx(DELAYTURN);
+		Delay1KTCYx(DELAYTURN);
 
 		/*
 		 * OUTDATED Turn
@@ -415,7 +320,7 @@ void turnleft(int steps)
 		current_pulse_right = next_pulse(current_pulse_right);
 		PORTC = current_pulse_right;
 
-		Delay10TCYx(DELAYTURN);
+		Delay1KTCYx(DELAYTURN);
 
 		/*
 		PORTC = BLUE;
