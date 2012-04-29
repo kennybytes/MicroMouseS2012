@@ -20,7 +20,6 @@
 #define BLUE 0x02
 #define RED 0x01
 
-
 void forward(int times, int pulse_right, int pulse_left);
 void reverse(void);
 
@@ -32,7 +31,6 @@ int next_pulse(int current);
 int last_pulse(int current);
 int current_pulse_right = RED;
 int current_pulse_left = RED;
-
 
 
 void main(void)
@@ -47,28 +45,24 @@ void main(void)
 	TRISD = 0x00;
 
 	//TRISE = 0x00;
-	PORTD = 0b00000001;
+	//PORTD = 0b00000001;
 	
 
-	while(1)
-	{
-	
-	
-		InitAD(RIGHTSENSOR);
+		InitAD(MIDDLESENSOR);
 		front = ConvertAD();
 		
+
 		while(1) 
 		{	
 			if( front < 500 ) 
 				track();
+			else
+				turnright(TURNRIGHT);
 			InitAD(MIDDLESENSOR);
 			front = ConvertAD();
 		}
 	
-	}
 }
-
-
 
 void track( void )
 {	
@@ -127,6 +121,8 @@ void track( void )
  *
  *
  */
+
+
 void reverse(void) 
 {
 		PORTA = BLUE;
