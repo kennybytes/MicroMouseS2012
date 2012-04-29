@@ -10,8 +10,8 @@
 #define DELAY 1
 #define DELAYTURN 25
 
-#define TURNRIGHT 83
-#define TURNLEFT 83
+#define TURNRIGHT 95
+#define TURNLEFT 95
 
 #define OPTIMAL 200
 
@@ -54,11 +54,11 @@ void main(void)
 
 		while(1) 
 		{	
-			if( front < 300 ) 
+			if( front < 250 ) 
 				track();
 			else
 			{
-				forward(50,1,1);
+				forward(150,1,1);
 				turnright(TURNRIGHT);
 			}
 			InitAD(MIDDLESENSOR);
@@ -83,7 +83,8 @@ void track( void )
   		Delay1KTCYx(10);
 	  	InitAD(RIGHTSENSOR);
  	  	right = ConvertAD() + OFFSETRIGHT;
-	  	if(right<OPTIMAL) right=200;
+	  	if(right<OPTIMAL)
+			right=200;
 
 	  	InitAD(LEFTSENSOR);
 	  	left = ConvertAD() + OFFSETLEFT;
