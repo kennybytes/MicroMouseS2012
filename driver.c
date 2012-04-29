@@ -126,28 +126,6 @@ void track( void )
  *
  */
 
-
-void reverse(void) 
-{
-		PORTA = BLUE;
-		PORTC = BLUE;
-		Delay100TCYx(DELAY);
-		PORTA = GREEN;
-		PORTC = GREEN;
-		Delay100TCYx(DELAY);
-		PORTA = YELLOW;
-		PORTC = YELLOW;
-		Delay100TCYx(DELAY);
-		PORTA = RED;
-		PORTC = RED;
-		Delay100TCYx(DELAY);
-}
-
-
-
-
-
-
 void forward(int times, int pulse_right, int pulse_left)
 {		
 		
