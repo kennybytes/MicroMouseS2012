@@ -172,38 +172,7 @@ void forward(int times, int pulse_right, int pulse_left)
 			}
 		}
 
-		/*
-		for ( i = 0 ; i < times ; i ++)
-		{
-
-		PORTA = BLUE;
-		Delay100TCYx(delayleft);
-
-		PORTC = BLUE;
-		Delay100TCYx(delayright);
-
-		PORTA = GREEN;
-		Delay100TCYx(delayleft);
-
-		PORTC = GREEN;
-		Delay100TCYx(delayright);
-
-		PORTA = YELLOW;
-		Delay100TCYx(delayleft);
-
-		PORTC = YELLOW;
-		Delay100TCYx(delayright);
-
-		PORTA = RED;
-		Delay100TCYx(delayleft);
-
-		PORTC = RED;
-		Delay100TCYx(delayright);
-		}
-		*/
-
 }
-
 
 /*
  *
