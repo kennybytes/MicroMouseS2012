@@ -64,10 +64,11 @@ int ConvertAD(void)
 
 	// Wait until A/D is done
 	while(ADCON0bits.GO_DONE != 0);
-
+	
+	output = ADRESH;
 
 	// Shift our output into a 10 bit int
-	temp1 = ADRESH << 2;
+	temp1 = output << 2;
 	temp2 = ADRESL >> 6;
 	output = temp1 + temp2;		
 

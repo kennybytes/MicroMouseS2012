@@ -54,10 +54,13 @@ void main(void)
 
 		while(1) 
 		{	
-			if( front < 500 ) 
+			if( front < 300 ) 
 				track();
 			else
+			{
+				forward(50,1,1);
 				turnright(TURNRIGHT);
+			}
 			InitAD(MIDDLESENSOR);
 			front = ConvertAD();
 		}
