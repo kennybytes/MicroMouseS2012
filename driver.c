@@ -3,10 +3,6 @@
 
 #include "atod.h"
 
-
-
-
-
 #define OFFSETRIGHT 0
 #define OFFSETLEFT 0
 
@@ -23,7 +19,6 @@
 #define GREEN 0x04
 #define BLUE 0x02
 #define RED 0x01
-
 
 
 void forward(int times, int pulse_right, int pulse_left);
