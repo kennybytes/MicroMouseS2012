@@ -181,6 +181,11 @@ void forward(int times, int pulse_right, int pulse_left)
  *
  *
  */
+
+// This function returns the NEXT step in the sequence where
+// 	the motor should pulse.
+//
+//
 int next_pulse(int current)
 {
 
@@ -199,6 +204,11 @@ int next_pulse(int current)
 	}
 
 }
+
+// This function return the previous step value where the
+// 	motor pulsed before.
+//
+//
 int last_pulse(int current)
 {
 	switch(current)
@@ -219,26 +229,15 @@ int last_pulse(int current)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
  *
  *
  *	Turning Functions
  *
  */
+
+
+
 void turnright(int steps)
 {	
 	int i;
@@ -252,27 +251,6 @@ void turnright(int steps)
 		PORTA = current_pulse_left;
 
 		Delay1KTCYx(DELAYTURN);
-
-		/*
-		 * OUTDATED Turn
-		PORTA = BLUE;
-		PORTC = RED;
-		Delay1KTCYx(DELAY);
-		
-		PORTA = GREEN;
-		PORTC = YELLOW;
-		Delay1KTCYx(DELAY);
-		
-		PORTA = YELLOW;
-		PORTC = GREEN;
-		Delay1KTCYx(DELAY);
-
-		PORTA = RED;	
-		PORTC = BLUE;
-		Delay1KTCYx(DELAY);
-		*
-		*/
-
 	}
 }
 
@@ -291,23 +269,5 @@ void turnleft(int steps)
 
 		Delay1KTCYx(DELAYTURN);
 
-		/*
-		PORTC = BLUE;
-		PORTA = RED;
-		Delay1KTCYx(DELAY);
-		
-		PORTC = GREEN;
-		PORTA = YELLOW;
-		Delay1KTCYx(DELAY);
-		
-		PORTC = YELLOW;
-		PORTA = GREEN;
-		Delay1KTCYx(DELAY);
-
-		PORTC = RED;	
-		PORTA = BLUE;
-		Delay1KTCYx(DELAY);
-		*/
-	
 	}
 }
