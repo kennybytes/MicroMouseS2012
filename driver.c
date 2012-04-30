@@ -34,22 +34,28 @@ void main(void)
 			break;
 		}
 		front = FetchSensor(FRONTSENSOR);
+
 	}
 
+	FetchAllSensors(&left, &front, &right);
 
 	/* Main Program loop */
 	while(1) 
 	{	
-		if( front < 250  ) 
-			track();
-		
-		else
+		/*	if the front is clear and sides are blocked */
+		if( front < 250  && right >= 200 && left >= 200) 
 		{
-			forward(150,1,1);
-			turnright(TURNRIGHT);
+			/* Just keep tracking forward */
+			track();
+		}
+
+		else{
+			//forward(150,1,1);
+			//turnright(TURNRIGHT);
 		}
 
 		FetchAllSensors(&left, &front, &right);
+
 
 	}
 
