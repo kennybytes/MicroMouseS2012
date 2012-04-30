@@ -24,13 +24,15 @@ void main(void)
 	PORTD = 0b00000001;
 
 	front = FetchSensor(FRONTSENSOR);
+	
+	FetchAllSensors(&left, &front, &right);
 
 	/* Wait for sign to start */
 	while(1)
 	{
 		if(front > 300)
 		{
-			Delay10KTCYx(100);
+			Delay10KTCYx(1000);
 			break;
 		}
 		front = FetchSensor(FRONTSENSOR);
@@ -43,15 +45,29 @@ void main(void)
 	while(1) 
 	{	
 		/*	if the front is clear and sides are blocked */
-		if( front < 250  && right >= 200 && left >= 200) 
-		{
+		if( (front < 400)  && (right > 100) && (left > 100) ){
+			
 			/* Just keep tracking forward */
 			track();
 		}
-
-		else{
-			//forward(150,1,1);
-			//turnright(TURNRIGHT);
+			
+		/*	If at a dead end */
+		if( (front > 400) && (right > 100) && (left > 100) )
+		{
+			turnright(150);
+		}
+		
+		/*	If there is a hole on the left */
+		if( (front < 700) && (right > 100) && (left < 100) )
+		{
+			forward(250,1,1);
+			turnleft(80);
+		}
+		
+		/* 	If there is a hole on the right */	
+		if( (front < 700) && (right < 100) && (left > 100) )
+		{
+			turnright(80);
 		}
 
 		FetchAllSensors(&left, &front, &right);
