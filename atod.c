@@ -24,7 +24,7 @@ void InitAD(int sensor)
 
 		// AN 9
 		// Middle Sensor
-		case MIDDLESENSOR:
+		case FRONTSENSOR:
 			ADCON1 = 0b00000011;//VSS,VDD ref. AN0 analog only
 			ADCON2 = 0b00001000; //ADCON2 setup: Left justified, Tacq=2Tad, Tad=2*Tosc (or Fosc/2)
 
@@ -49,6 +49,27 @@ void InitAD(int sensor)
 
 }
 
+void FetchAllSensors( int *left, int *front, int *right ) 
+{
+
+
+       InitAD(FRONTSENSOR);
+       (*front) = ConvertAD();
+                             
+       InitAD(RIGHTSENSOR);
+       (*right) = ConvertAD();
+                             
+       InitAD(LEFTSENSOR);
+       (*left) = ConvertAD();
+
+
+}
+
+int FetchSensor(int whichsensor)
+{
+	InitAD(whichsensor);
+	return ConvertAD();
+}
 
 
 int ConvertAD(void)

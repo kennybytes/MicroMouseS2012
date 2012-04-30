@@ -10,7 +10,6 @@
 #include "atod.h"
 #include "motors.h"
 #include "track.h"
-
 void main(void)
 {
 	int front, left, right;
@@ -24,29 +23,34 @@ void main(void)
 	//TRISE = 0x00;
 	PORTD = 0b00000001;
 
-	InitAD(MIDDLESENSOR);
-	front = ConvertAD();
-		
+	front = FetchSensor(FRONTSENSOR);
+
+	/* Wait for sign to start */
 	while(1)
 	{
-		forward(1,1,1);
+		if(front > 300)
+		{
+			Delay10KTCYx(100);
+			break;
+		}
+		front = FetchSensor(FRONTSENSOR);
 	}
 
+
+	/* Main Program loop */
 	while(1) 
 	{	
-
-		if( front < 250 ) 
+		if( front < 250  ) 
 			track();
-			
+		
 		else
 		{
 			forward(150,1,1);
 			turnright(TURNRIGHT);
 		}
 
+		FetchAllSensors(&left, &front, &right);
 
-		InitAD(MIDDLESENSOR);
-		front = ConvertAD();
 	}
 
 
