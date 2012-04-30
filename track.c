@@ -9,7 +9,7 @@
  *
  */
 #include "track.h"
-void track( int steps )
+void track( int step )
 {	
 	int sum = 0;
 	int i = 0;
@@ -19,7 +19,7 @@ void track( int steps )
 	
 	int error = 0;
 
-	// Move Forward and Track
+	/* 	step without tracking 	*/
 	for(i=0;i<steps;i++)
 	{
   		//Delay1KTCYx(10);
@@ -42,6 +42,8 @@ void track( int steps )
 	// Divide our error by 5 (how many steps we took)
 	sum = sum/steps;
 			
+	
+	/* 	Actually Correct Here	*/
 
 	// if mouse is tilted towards right
 	if( sum < -25 ){	

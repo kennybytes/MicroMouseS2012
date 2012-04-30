@@ -50,7 +50,7 @@ void main(void)
 		if( (front < 400)  && (right > 100) && (left > 100) ){
 			
 			/* Just keep tracking forward */
-			track(5);
+			track(10);
 		}
 			
 		/*	If at a dead end */
