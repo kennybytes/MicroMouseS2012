@@ -10,6 +10,5 @@
  *	is necessary to keep the mouse from hitting the walls.
  *
  */
-
 #include "motors.h"
 void track(void);

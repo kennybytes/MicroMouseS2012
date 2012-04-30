@@ -9,11 +9,18 @@
  * 	and any functions that have access to the motor.
  *
  */
+#ifndef MOTORS_H 
+#define MOTORS_H
 
 #define YELLOW 0x08
 #define GREEN 0x04
 #define BLUE 0x02
 #define RED 0x01
+
+#define STEPDELAY 1 
+#include <p18f4620.h>
+#include <delays.h>
+
 
 void forward(int times, int pulse_right, int pulse_left);
 int next_pulse(int current);
@@ -22,5 +29,7 @@ void turnright(int steps);
 void turnleft(int steps);
 
 
+int current_pulse_right = RED;
+int current_pulse_left = RED;
 
-
+#endif

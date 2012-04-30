@@ -10,8 +10,9 @@
 #define OPTIMAL 200
 
 #include <delays.h>
-
 #include "atod.h"
+#include "motors.h"
+#include "track.h"
 
 void main(void)
 {
@@ -45,4 +46,3 @@ void main(void)
 		}
 	
 }
-

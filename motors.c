@@ -11,6 +11,10 @@
  */
 
 
+
+#include "motors.h"
+
+
 /*
  *
  *
@@ -31,14 +35,14 @@ void forward(int times, int pulse_right, int pulse_left)
 			{
 			current_pulse_right = next_pulse(current_pulse_right);
 			PORTC = current_pulse_right;
-			Delay100TCYx(DELAY);
+			Delay100TCYx(STEPDELAY);
 			}
 
 			if(pulse_left)
 			{
 			current_pulse_left = next_pulse(current_pulse_left);
 			PORTA = current_pulse_left;
-			Delay100TCYx(DELAY);
+			Delay100TCYx(STEPDELAY);
 
 			}
 		}
@@ -121,7 +125,7 @@ void turnright(int steps)
 		current_pulse_left = next_pulse(current_pulse_left);
 		PORTA = current_pulse_left;
 
-		Delay1KTCYx(DELAYTURN);
+		Delay100TCYx(STEPDELAY);
 	}
 }
 
@@ -138,7 +142,7 @@ void turnleft(int steps)
 		current_pulse_right = next_pulse(current_pulse_right);
 		PORTC = current_pulse_right;
 
-		Delay1KTCYx(DELAYTURN);
+		Delay100TCYx(STEPDELAY);
 
 	}
 }
