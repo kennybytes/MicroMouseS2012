@@ -17,7 +17,9 @@
 #define BLUE 0x02
 #define RED 0x01
 
-#define STEPDELAY 1 
+//	90 - MAX speed
+//	150 - Safe Speed
+#define STEPDELAY 150
 #include <p18f4620.h>
 #include <delays.h>
 

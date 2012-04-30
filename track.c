@@ -22,7 +22,7 @@ void track( void )
 	// Move Forward and Track
 	for(i=0;i<5;i++)
 	{
-  		Delay1KTCYx(10);
+  		//Delay1KTCYx(10);
 	  	InitAD(RIGHTSENSOR);
  	  	right = ConvertAD() + OFFSETRIGHT;
 	  	if(right<OPTIMAL)
@@ -31,7 +31,6 @@ void track( void )
 	  	InitAD(LEFTSENSOR);
 	  	left = ConvertAD() + OFFSETLEFT;
 	  	if(left<OPTIMAL) left=200;
-
 
 		error = (right - left);
 	 	sum = sum + error;

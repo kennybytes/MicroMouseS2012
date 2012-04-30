@@ -1,7 +1,7 @@
 #include <p18f4620.h>
 
 #define REPEAT 5
-#define DELAY 1
+#define DELAY 20
 #define DELAYTURN 25
 #define TURNRIGHT 95
 #define TURNLEFT 95
@@ -23,21 +23,31 @@ void main(void)
 
 	//TRISE = 0x00;
 	PORTD = 0b00000001;
-	
 
 	InitAD(MIDDLESENSOR);
 	front = ConvertAD();
 		
+	while(1)
+	{
+		forward(1,1,1);
+	}
+
 	while(1) 
 	{	
-			if( front < 250 ) 
-				track();
-			else
-			{
-				forward(150,1,1);
-				turnright(TURNRIGHT);
-			}
-			InitAD(MIDDLESENSOR);
-			front = ConvertAD();
+
+		if( front < 250 ) 
+			track();
+			
+		else
+		{
+			forward(150,1,1);
+			turnright(TURNRIGHT);
+		}
+
+
+		InitAD(MIDDLESENSOR);
+		front = ConvertAD();
 	}
+
+
 }
