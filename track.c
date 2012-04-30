@@ -9,7 +9,7 @@
  *
  */
 #include "track.h"
-void track( void )
+void track( int steps )
 {	
 	int sum = 0;
 	int i = 0;
@@ -20,7 +20,7 @@ void track( void )
 	int error = 0;
 
 	// Move Forward and Track
-	for(i=0;i<5;i++)
+	for(i=0;i<steps;i++)
 	{
   		//Delay1KTCYx(10);
 	  	InitAD(RIGHTSENSOR);
@@ -40,7 +40,7 @@ void track( void )
 	}
 
 	// Divide our error by 5 (how many steps we took)
-	sum = sum/5;
+	sum = sum/steps;
 			
 
 	// if mouse is tilted towards right

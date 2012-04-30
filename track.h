@@ -19,4 +19,4 @@
 
 #include "motors.h"
 #include "atod.h"
-void track(void);
+void track(int steps);

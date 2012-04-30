@@ -44,29 +44,33 @@ void main(void)
 	/* Main Program loop */
 	while(1) 
 	{	
+
+	
 		/*	if the front is clear and sides are blocked */
 		if( (front < 400)  && (right > 100) && (left > 100) ){
 			
 			/* Just keep tracking forward */
-			track();
+			track(5);
 		}
 			
 		/*	If at a dead end */
 		if( (front > 400) && (right > 100) && (left > 100) )
 		{
+			/* Turn Around */
 			turnright(150);
 		}
 		
-		/*	If there is a hole on the left */
+		/*	If there is an opening on the left */
 		if( (front < 700) && (right > 100) && (left < 100) )
 		{
-			forward(250,1,1);
+			track(200);
 			turnleft(80);
 		}
 		
-		/* 	If there is a hole on the right */	
+		/* 	If there is an opening on the right */	
 		if( (front < 700) && (right < 100) && (left > 100) )
 		{
+			forward(200,1,1);
 			turnright(80);
 		}
 
