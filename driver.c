@@ -1,13 +1,10 @@
 #include <p18f4620.h>
 
-#define OFFSETRIGHT 0
-#define OFFSETLEFT 0
 #define REPEAT 5
 #define DELAY 1
 #define DELAYTURN 25
 #define TURNRIGHT 95
 #define TURNLEFT 95
-#define OPTIMAL 200
 
 #include <delays.h>
 #include "atod.h"

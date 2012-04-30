@@ -10,5 +10,13 @@
  *	is necessary to keep the mouse from hitting the walls.
  *
  */
+
+
+
+#define OFFSETRIGHT 0
+#define OFFSETLEFT 0
+#define OPTIMAL 200
+
 #include "motors.h"
+#include "atod.h"
 void track(void);
