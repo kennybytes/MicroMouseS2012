@@ -1,8 +1,13 @@
 /*
  *
  *
- * atod.h
+ * File Name:	atod.h
+ * Author:	Kenny Luong
  *
+ * Description:
+ * 	The AtoD library contains the functions responsible for converting
+ * 	analog voltage input from our sensors to discrete digital output 
+ * 	that we can use.
  *
  */
 
