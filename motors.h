@@ -28,8 +28,4 @@ int last_pulse(int current);
 void turnright(int steps);
 void turnleft(int steps);
 
-
-int current_pulse_right = RED;
-int current_pulse_left = RED;
-
 #endif

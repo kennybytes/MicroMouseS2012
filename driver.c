@@ -22,15 +22,14 @@ void main(void)
 	TRISD = 0x00;
 
 	//TRISE = 0x00;
-	//PORTD = 0b00000001;
+	PORTD = 0b00000001;
 	
 
-		InitAD(MIDDLESENSOR);
-		front = ConvertAD();
+	InitAD(MIDDLESENSOR);
+	front = ConvertAD();
 		
-
-		while(1) 
-		{	
+	while(1) 
+	{	
 			if( front < 250 ) 
 				track();
 			else
@@ -40,6 +39,5 @@ void main(void)
 			}
 			InitAD(MIDDLESENSOR);
 			front = ConvertAD();
-		}
-	
+	}
 }

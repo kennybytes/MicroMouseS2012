@@ -11,10 +11,13 @@
  */
 
 
+#ifndef MOTORS
+#define MOTORS
 
 #include "motors.h"
 
-
+int current_pulse_right = RED;
+int current_pulse_left = RED;
 /*
  *
  *
@@ -146,3 +149,5 @@ void turnleft(int steps)
 
 	}
 }
+
+#endif
