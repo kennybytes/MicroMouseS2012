@@ -72,7 +72,7 @@ void main(void)
 		{	
 			int i;
 			for(i = 0; i < 200 ; i ++){
-				totalerror=track(1);
+				totalerror=trackright(1);
 				correct(&totalerror);
 			}
 			turnleft(80);
@@ -83,7 +83,7 @@ void main(void)
 		{	
 			int i;
 			for(i = 0; i< 200 ; i++){
-				totalerror=track(1);
+				totalerror=trackleft(1);
 				correct(&totalerror);
 			}
 			turnright(80);
