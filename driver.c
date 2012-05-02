@@ -53,7 +53,7 @@ void main(void)
 		if( (front < 400)  && (right > 100) && (left > 100) ){
 			
 			/* Just keep tracking forward */
-			totalerror+=track(4);
+			totalerror+=track(1);
 			correct(&totalerror);
 		}
 			

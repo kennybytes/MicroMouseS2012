@@ -19,7 +19,9 @@ int track(int steps)
 	
 	int error = 0;
 
+
 	/* 	step without tracking 	*/
+
 	for(i=0;i<steps;i++)
 	{
   		//Delay1KTCYx(10);
@@ -45,10 +47,11 @@ int track(int steps)
 	}
 
 	// Divide our error by 5 (how many steps we took)
-	sum = sum/5;
+	sum = sum/steps;
 			
 	
 	/* 	Actually Correct Here	*/
+	/*
 	// if mouse is tilted towards right
 	if( sum < -25 ){	
 		forward(1,0,1);
@@ -60,7 +63,8 @@ int track(int steps)
 		forward(1,1,0);
 		sum = sum - 25;
 	}
-	
+	*/
+
 	return sum;
 
 }
@@ -71,15 +75,15 @@ void correct(int *totalerror)
 	/* 	Actually Correct Here	*/
                                     
 	// if mouse is tilted towards right
-	if( (*totalerror) < -25 ){	
+	if( (*totalerror) < -150 ){	
 		forward(1,0,1);
-		(*totalerror) += 25;
+		(*totalerror) += 150;
 	}
 					    
 	// if mouse is tilted towards left
-	if((*totalerror) > 25 ){
+	if((*totalerror) > 150 ){
 		forward(1,1,0);
-		(*totalerror) -= 25;
+		(*totalerror) -= 150;
 	}
 }
 
