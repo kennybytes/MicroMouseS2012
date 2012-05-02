@@ -50,10 +50,10 @@ void main(void)
 		FetchAllSensors(&left, &front, &right);
 	
 		/*	if the front is clear and sides are blocked */
-		if( (front <= 600)  && (right > 100) && (left > 100) ){
+		if( (front <= 600)  && (right > 130) && (left > 130) ){
 			
 			/* Just keep tracking forward */
-			totalerror+=track(1);
+			totalerror+=track(3);
 			correct(&totalerror);
 		}
 			
@@ -62,7 +62,7 @@ void main(void)
 		{
 			/* Turn Around */
 			track(40);
-			turnright(150);
+			turnright(165);
 		}
 		
 
@@ -74,17 +74,16 @@ void main(void)
 			Delay10KTCYx(100);
 			right = FetchSensor(RIGHTSENSOR);
 			/* Track off right wall for a bit */
-			for(i = 0; i < 100 ; i ++){
+			totalerror = 0;
+			for(i = 0; i < 200 ; i ++){
+				left = FetchSensor(LEFTSENSOR);
+				if(left > 200) break;
 				totalerror=trackleft(1, right-25);
 				correct(&totalerror);
 			}
 
 			/* NO Tracking */
-			while(front < 700)
-			{
-				front = FetchSensor(FRONTSENSOR);
-				forward(1,1,1);
-			}
+			forward(100,1,1);
 
 			turnleft(80);
 		}
@@ -94,8 +93,8 @@ void main(void)
 		{	
 			int i;
 			left = FetchSensor(LEFTSENSOR);
-
-			for(i = 0; i< 50 ; i++){
+			totalerror = 0 ;
+			for(i = 0; i< 160 ; i++){
 				totalerror=trackleft(1, left);
 				correct(&totalerror);
 			}
