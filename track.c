@@ -88,17 +88,20 @@ int trackleft(int steps,	int optimal)
 void correct(int *totalerror)
 {
 
+	int absolute_sum;
+	if(sum<0) absolute_sum = -(sum);
+	else	absolute_sum = sum;
 
 	/* 	Actually Correct Here	*/
 	// if mouse is tilted towards right
-	if( (*totalerror) < -200 ){	
-		forward(1,0,1);
+	if( (*totalerror) < 0 ){	
+		forward(absolute_sum/5,0,1);
 		(*totalerror) += 200;
 	}
 					    
 	// if mouse is tilted towards left
-	if((*totalerror) > 150 ){
-		forward(1,1,0);
+	if((*totalerror) > 0 ){
+		forward(absolute_sum/5,1,0);
 		(*totalerror) -= 200;
 	}
 
