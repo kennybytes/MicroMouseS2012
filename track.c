@@ -45,7 +45,7 @@ void track(void)
 	}
 
 	// Divide our error by 5 (how many steps we took)
-	sum;
+	sum = sum/5;
 			
 	
 	/* 	Actually Correct Here	*/
@@ -53,13 +53,13 @@ void track(void)
 	// if mouse is tilted towards right
 	if( sum < -25 ){	
 		forward(1,0,1);
-		sum = sum + 5;
+		sum = sum + 25;
 	}
 
 	// if mouse is tilted towards left
 	if(sum > 25 ){
 		forward(1,1,0);
-		sum = sum - 5;
+		sum = sum - 25;
 	}
 
 
