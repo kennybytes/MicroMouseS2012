@@ -62,8 +62,11 @@ void main(void)
 		{
 			/* Turn Around */
 			//turnright(150);
+			for(;;);
 		}
 		
+
+
 		/*	If there is an opening on the left */
 		if( (front < 700) && (right > 100) && (left < 100) )
 		{

@@ -49,22 +49,6 @@ int track(int steps)
 	// Divide our error by 5 (how many steps we took)
 	sum = sum/steps;
 			
-	
-	/* 	Actually Correct Here	*/
-	/*
-	// if mouse is tilted towards right
-	if( sum < -25 ){	
-		forward(1,0,1);
-		sum = sum + 25;
-	}
-
-	// if mouse is tilted towards left
-	if(sum > 25 ){
-		forward(1,1,0);
-		sum = sum - 25;
-	}
-	*/
-
 	return sum;
 
 }
