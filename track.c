@@ -51,6 +51,7 @@ int trackleft(int steps)
 	int i;
 	int right = 0;
 	int left = 0;
+	int error = 0;
 	for(i = 0; i < steps ; i++)
 	{
 		right = OPTIMAL;
@@ -68,6 +69,7 @@ int trackleft(int steps)
 	int i;
 	int right = 0;
 	int left = 0;
+	int error = 0;
 	for(i = 0; i < steps ; i++)
 	{
 		left = OPTIMAL;

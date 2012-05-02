@@ -1,25 +1,13 @@
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 52 : symbol 'i' has not been defined
-Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 52 : lvalue required
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 52 : symbol 'i' has not been defined
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 52 : symbol 'i' has not been defined
-Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 52 : lvalue required
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 54 : symbol 'right' has not been defined
-Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 54 : lvalue required
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 55 : symbol 'left' has not been defined
-Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 55 : lvalue required
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 56 : symbol 'error' has not been defined
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 56 : symbol 'right' has not been defined
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 56 : symbol 'left' has not been defined
-Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 56 : lvalue required
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 57 : symbol 'sum' has not been defined
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 57 : symbol 'error' has not been defined
-Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 57 : lvalue required
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 61 : symbol 'sum' has not been defined
-Error[1504] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 64 : redefinition of 'trackleft'
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 67 : symbol 'i' has not been defined
-Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 67 : lvalue required
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 67 : symbol 'i' has not been defined
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 67 : symbol 'i' has not been defined
-Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 67 : lvalue required
-Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 69 : symbol 'left' has not been defined
-Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 69 : lvalue required
+Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 58 : symbol 'error' has not been defined
+Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 58 : lvalue required
+Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 59 : symbol 'sum' has not been defined
+Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 59 : symbol 'error' has not been defined
+Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 59 : lvalue required
+Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 63 : symbol 'sum' has not been defined
+Error[1504] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 66 : redefinition of 'trackleft'
+Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 75 : symbol 'error' has not been defined
+Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 75 : lvalue required
+Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 76 : symbol 'sum' has not been defined
+Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 76 : symbol 'error' has not been defined
+Error[1101] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 76 : lvalue required
+Error[1105] C:\Users\Kenny\Dropbox\!- uMouse\BK\FinalWorkSpace\track.c 80 : symbol 'sum' has not been defined
