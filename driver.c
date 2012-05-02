@@ -13,6 +13,8 @@
 void main(void)
 {
 	int front, left, right;
+	int totalerror = 0;
+
 	// Set inputs and outputs
 	
 	TRISA = 0x00;		// left motor
@@ -22,6 +24,7 @@ void main(void)
 
 	//TRISE = 0x00;
 	PORTD = 0b00000001;
+	
 
 	front = FetchSensor(FRONTSENSOR);
 	
@@ -50,7 +53,8 @@ void main(void)
 		if( (front < 400)  && (right > 100) && (left > 100) ){
 			
 			/* Just keep tracking forward */
-			track();
+			totalerror+=track(4);
+			correct(&totalerror);
 		}
 			
 		/*	If at a dead end */

@@ -9,8 +9,8 @@
  *
  */
 #include "track.h"
-void track(void)
-{	
+int track(int steps)
+{
 	int sum = 0;
 	int i = 0;
 	int right = 0;
@@ -20,7 +20,7 @@ void track(void)
 	int error = 0;
 
 	/* 	step without tracking 	*/
-	for(i=0;i<5;i++)
+	for(i=0;i<steps;i++)
 	{
   		//Delay1KTCYx(10);
 	  	InitAD(RIGHTSENSOR);
@@ -49,7 +49,6 @@ void track(void)
 			
 	
 	/* 	Actually Correct Here	*/
-
 	// if mouse is tilted towards right
 	if( sum < -25 ){	
 		forward(1,0,1);
@@ -61,7 +60,26 @@ void track(void)
 		forward(1,1,0);
 		sum = sum - 25;
 	}
+	
+	return sum;
+
+}
 
 
+void correct(int *totalerror)
+{
+	/* 	Actually Correct Here	*/
+                                    
+	// if mouse is tilted towards right
+	if( (*totalerror) < -25 ){	
+		forward(1,0,1);
+		(*totalerror) += 25;
+	}
+					    
+	// if mouse is tilted towards left
+	if((*totalerror) > 25 ){
+		forward(1,1,0);
+		(*totalerror) -= 25;
+	}
 }
 

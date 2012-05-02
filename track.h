@@ -19,4 +19,7 @@
 
 #include "motors.h"
 #include "atod.h"
-void track(void);
+int track(int steps);
+void correct(int *totalerror);
+
+
