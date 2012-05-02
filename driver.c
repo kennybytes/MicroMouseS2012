@@ -71,7 +71,7 @@ void main(void)
 		if( (front < 700) && (right > 100) && (left < 100) )
 		{	
 			int i;
-			for(i = 0; i < 200 ; i ++){
+			for(i = 0; i < 220 ; i ++){
 				totalerror=trackright(1);
 				correct(&totalerror);
 			}
@@ -82,7 +82,7 @@ void main(void)
 		if( (front < 700) && (right < 100) && (left > 100) )
 		{	
 			int i;
-			for(i = 0; i< 200 ; i++){
+			for(i = 0; i< 220 ; i++){
 				totalerror=trackleft(1);
 				correct(&totalerror);
 			}
