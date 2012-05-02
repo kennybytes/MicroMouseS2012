@@ -50,7 +50,7 @@ void main(void)
 
 	
 		/*	if the front is clear and sides are blocked */
-		if( (front < 400)  && (right > 100) && (left > 100) ){
+		if( (front <= 600)  && (right > 100) && (left > 100) ){
 			
 			/* Just keep tracking forward */
 			totalerror+=track(1);
@@ -58,7 +58,7 @@ void main(void)
 		}
 			
 		/*	If at a dead end */
-		if( (front > 400) && (right > 100) && (left > 100) )
+		if( (front > 600) && (right > 100) && (left > 100) )
 		{
 			/* Turn Around */
 			turnright(150);
@@ -69,15 +69,15 @@ void main(void)
 		/*	If there is an opening on the left */
 		if( (front < 700) && (right > 100) && (left < 100) )
 		{
-			//track(200);
-			//turnleft(80);
+			forward(200,1,1);
+			turnleft(80);
 		}
 		
 		/* 	If there is an opening on the right */	
 		if( (front < 700) && (right < 100) && (left > 100) )
 		{
-			//forward(200,1,1);
-			//turnright(80);
+			forward(200,1,1);
+			turnright(80);
 		}
 
 		FetchAllSensors(&left, &front, &right);

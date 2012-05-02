@@ -122,10 +122,10 @@ void turnright(int steps)
 	{
 
 		current_pulse_right = last_pulse(current_pulse_right);
-		PORTC = current_pulse_right;
+		PORTA = current_pulse_right;
 		
 		current_pulse_left = next_pulse(current_pulse_left);
-		PORTA = current_pulse_left;
+		PORTC = current_pulse_left;
 
 		Delay100TCYx(STEPDELAY);
 	}
@@ -138,10 +138,10 @@ void turnleft(int steps)
 	for( i = 0 ; i < steps; i++)
 	{
 		current_pulse_left = last_pulse(current_pulse_left);
-		PORTA = current_pulse_left;
+		PORTC = current_pulse_left;
 
 		current_pulse_right = next_pulse(current_pulse_right);
-		PORTC = current_pulse_right;
+		PORTA = current_pulse_right;
 
 		Delay100TCYx(STEPDELAY);
 
