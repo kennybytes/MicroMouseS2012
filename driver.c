@@ -61,8 +61,7 @@ void main(void)
 		if( (front > 400) && (right > 100) && (left > 100) )
 		{
 			/* Turn Around */
-			//turnright(150);
-			for(;;);
+			turnright(150);
 		}
 		
 

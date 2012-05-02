@@ -56,18 +56,21 @@ int track(int steps)
 
 void correct(int *totalerror)
 {
+
+
 	/* 	Actually Correct Here	*/
-                                    
 	// if mouse is tilted towards right
-	if( (*totalerror) < -150 ){	
+	if( (*totalerror) < -200 ){	
 		forward(1,0,1);
-		(*totalerror) += 150;
+		(*totalerror) += 200;
 	}
 					    
 	// if mouse is tilted towards left
 	if((*totalerror) > 150 ){
 		forward(1,1,0);
-		(*totalerror) -= 150;
+		(*totalerror) -= 200;
 	}
+
+
 }
 
