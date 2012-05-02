@@ -21,5 +21,5 @@
 #include "atod.h"
 int track(int steps);
 void correct(int *totalerror);
-
-
+int trackleft(int steps);
+int trackright(int steps);

@@ -24,21 +24,14 @@ int track(int steps)
 
 	for(i=0;i<steps;i++)
 	{
-  		//Delay1KTCYx(10);
-	  	InitAD(RIGHTSENSOR);
- 	  	right = ConvertAD() + OFFSETRIGHT;
+ 	  	right = FetchSensor(RIGHTSENSOR) + OFFSETRIGHT;
 
-		/*
 	  	if(right<OPTIMAL)
-			right=200;
-		*/
+			right=OPTIMAL;
 
-	  	InitAD(LEFTSENSOR);
-	  	left = ConvertAD() + OFFSETLEFT;
+	  	left = FetchSensor(LEFTSENSOR) + OFFSETLEFT;
 		
-		/*
-	  	if(left<OPTIMAL) left=200;
-		*/
+	  	if(left<OPTIMAL) left=OPTIMAL;
 		error = (right - left);
 	 	sum = sum + error;
 
@@ -51,6 +44,36 @@ int track(int steps)
 			
 	return sum;
 
+}
+
+int trackleft(int steps)
+{
+	
+	for(i = 0; i < steps ; i++)
+	{
+		right = OPTIMAL;
+		left = FetchSensor(LEFTSENSOR);
+		error = (right - left);
+		sum += error;
+		forward(1,1,1);
+	}
+
+	return sum;
+
+}
+int trackleft(int steps)
+{
+
+	for(i = 0; i < steps ; i++)
+	{
+		left = OPTIMAL;
+		right = FetchSensor(RIGHTSENSOR);
+		error = (right - left);
+		sum += error;
+		forward(1,1,1);
+	}
+
+	return sum;
 }
 
 

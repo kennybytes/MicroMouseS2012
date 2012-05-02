@@ -58,9 +58,10 @@ void main(void)
 		}
 			
 		/*	If at a dead end */
-		if( (front > 600) && (right > 100) && (left > 100) )
+		if( (front > 400) && (right > 100) && (left > 100) )
 		{
 			/* Turn Around */
+			track(40);
 			turnright(150);
 		}
 		
@@ -68,15 +69,23 @@ void main(void)
 
 		/*	If there is an opening on the left */
 		if( (front < 700) && (right > 100) && (left < 100) )
-		{
-			forward(200,1,1);
+		{	
+			int i;
+			for(i = 0; i < 200 ; i ++){
+				totalerror=track(1);
+				correct(&totalerror);
+			}
 			turnleft(80);
 		}
 		
 		/* 	If there is an opening on the right */	
 		if( (front < 700) && (right < 100) && (left > 100) )
-		{
-			forward(200,1,1);
+		{	
+			int i;
+			for(i = 0; i< 200 ; i++){
+				totalerror=track(1);
+				correct(&totalerror);
+			}
 			turnright(80);
 		}
 
