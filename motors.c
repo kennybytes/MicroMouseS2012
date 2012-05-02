@@ -37,13 +37,13 @@ void forward(int times, int pulse_right, int pulse_left)
 			if(pulse_right)
 			{
 			current_pulse_right = next_pulse(current_pulse_right);
-			PORTC = current_pulse_right;
+			PORTA = current_pulse_right;
 			}
 
 			if(pulse_left)
 			{
 			current_pulse_left = next_pulse(current_pulse_left);
-			PORTA = current_pulse_left;
+			PORTC = current_pulse_left;
 			}
 
 			Delay100TCYx(STEPDELAY);

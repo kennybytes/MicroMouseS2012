@@ -51,13 +51,13 @@ void track(void)
 	/* 	Actually Correct Here	*/
 
 	// if mouse is tilted towards right
-	if( sum < -5 ){	
+	if( sum < -25 ){	
 		forward(1,0,1);
 		sum = sum + 5;
 	}
 
 	// if mouse is tilted towards left
-	if(sum > 5 ){
+	if(sum > 25 ){
 		forward(1,1,0);
 		sum = sum - 5;
 	}
