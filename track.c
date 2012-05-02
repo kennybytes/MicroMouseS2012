@@ -20,7 +20,7 @@ void track( int step )
 	int error = 0;
 
 	/* 	step without tracking 	*/
-	for(i=0;i<steps;i++)
+	for(i=0;i<5;i++)
 	{
   		//Delay1KTCYx(10);
 	  	InitAD(RIGHTSENSOR);
@@ -40,7 +40,7 @@ void track( int step )
 	}
 
 	// Divide our error by 5 (how many steps we took)
-	sum = sum/steps;
+	sum = sum/5;
 			
 	
 	/* 	Actually Correct Here	*/

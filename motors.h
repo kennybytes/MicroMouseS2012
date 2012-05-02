@@ -12,10 +12,17 @@
 #ifndef MOTORS_H 
 #define MOTORS_H
 
+/*
 #define YELLOW 0x08
 #define GREEN 0x04
 #define BLUE 0x02
 #define RED 0x01
+*/
+
+#define YELLOW 0x01
+#define GREEN 0x02
+#define BLUE 0x04
+#define RED 0x08
 
 //	90 - MAX speed
 //	150 - Safe Speed
