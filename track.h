@@ -15,8 +15,8 @@
 
 #define OFFSETRIGHT 0
 #define OFFSETLEFT 0
-#define OPTIMAL 200
+#define OPTIMAL 150
 
 #include "motors.h"
 #include "atod.h"
-void track(int steps);
+void track(void);

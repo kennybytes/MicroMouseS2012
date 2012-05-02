@@ -50,28 +50,28 @@ void main(void)
 		if( (front < 400)  && (right > 100) && (left > 100) ){
 			
 			/* Just keep tracking forward */
-			track(10);
+			track();
 		}
 			
 		/*	If at a dead end */
 		if( (front > 400) && (right > 100) && (left > 100) )
 		{
 			/* Turn Around */
-			turnright(150);
+			//turnright(150);
 		}
 		
 		/*	If there is an opening on the left */
 		if( (front < 700) && (right > 100) && (left < 100) )
 		{
-			track(200);
-			turnleft(80);
+			//track(200);
+			//turnleft(80);
 		}
 		
 		/* 	If there is an opening on the right */	
 		if( (front < 700) && (right < 100) && (left > 100) )
 		{
-			forward(200,1,1);
-			turnright(80);
+			//forward(200,1,1);
+			//turnright(80);
 		}
 
 		FetchAllSensors(&left, &front, &right);
