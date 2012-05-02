@@ -40,7 +40,7 @@ int track(int steps)
 	}
 
 	// Divide our error by 5 (how many steps we took)
-	sum = sum/steps;
+	sum = sum;
 			
 	return sum;
 
@@ -95,14 +95,14 @@ void correct(int *totalerror)
 	/* 	Actually Correct Here	*/
 	// if mouse is tilted towards right
 	if( (*totalerror) < 0 ){	
-		forward(absolute_err/5,0,1);
-		(*totalerror) += 200;
+		forward(absolute_err/40,0,1);
+		(*totalerror) += absolute_err/40;
 	}
 					    
 	// if mouse is tilted towards left
 	if((*totalerror) > 0 ){
-		forward(absolute_err/5,1,0);
-		(*totalerror) -= 200;
+		forward(absolute_err/40,1,0);
+		(*totalerror) -= absolute_err/40;
 	}
 
 
