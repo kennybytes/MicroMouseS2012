@@ -46,7 +46,7 @@ int track(int steps)
 
 }
 
-int trackright(int steps)
+int trackright(int steps, int optimal)
 {
 	int i;
 	int right = 0;
@@ -55,7 +55,7 @@ int trackright(int steps)
 	int sum = 0;
 	for(i = 0; i < steps ; i++)
 	{
-		right = OPTIMAL;
+		right = optimal;
 		left = FetchSensor(LEFTSENSOR);
 		error = (right - left);
 		sum += error;
@@ -65,7 +65,7 @@ int trackright(int steps)
 	return sum;
 
 }
-int trackleft(int steps)
+int trackleft(int steps,	int optimal)
 {
 	int i;
 	int right = 0;
@@ -74,7 +74,7 @@ int trackleft(int steps)
 	int sum = 0;
 	for(i = 0; i < steps ; i++)
 	{
-		left = OPTIMAL;
+		left = optimal;
 		right = FetchSensor(RIGHTSENSOR);
 		error = (right - left);
 		sum += error;

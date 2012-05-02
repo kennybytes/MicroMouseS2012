@@ -92,8 +92,6 @@ int ConvertAD(void)
 	temp2 = ADRESL >> 6;
 	output = temp1 + temp2;		
 
-
 	return output;
-
 
 }
