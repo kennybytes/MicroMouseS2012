@@ -53,7 +53,7 @@ void main(void)
 		if( (front <= 600)  && (right > 130) && (left > 130) ){
 			
 			/* Just keep tracking forward */
-			totalerror+=track(3);
+			totalerror+=track(1);
 			correct(&totalerror);
 		}
 			
@@ -83,9 +83,9 @@ void main(void)
 			}
 
 			/* NO Tracking */
-			forward(100,1,1);
+			forward(30,1,1);
 
-			turnleft(80);
+			turnleft(77);
 		}
 		
 		/* 	If there is an opening on the right */	

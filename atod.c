@@ -51,8 +51,6 @@ void InitAD(int sensor)
 
 void FetchAllSensors( int *left, int *front, int *right ) 
 {
-
-
        InitAD(FRONTSENSOR);
        (*front) = ConvertAD();
                              
