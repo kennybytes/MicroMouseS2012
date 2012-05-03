@@ -62,9 +62,8 @@ void main(void)
 		{
 			/* Turn Around */
 			track(40);
-			turnright(165);
+			turnright(160);
 		}
-		
 
 
 		/*	If there is an opening on the left */
@@ -85,31 +84,43 @@ void main(void)
 			/* NO Tracking */
 			forward(30,1,1);
 
-			turnleft(77);
+			turnleft(75);
 		}
 		
 		/* 	If there is an opening on the right */	
 		if( (front < 700) && (right < 150) && (left > 150) )
 		{	
 			int i;
+			Delay10KTCYx(100);
 			left = FetchSensor(LEFTSENSOR);
 			totalerror = 0 ;
-			for(i = 0; i< 160 ; i++){
-				totalerror=trackleft(1, left);
+
+			for(i = 0; i < 200 ; i ++){
+				right = FetchSensor(RIGHTSENSOR);
+				if(right > 200) break;
+				totalerror=trackright(1, left-25);
 				correct(&totalerror);
 			}
-
+				
+			forward(30,1,1);
+			turnright(75);
+		}
+		
+		FetchAllSensors(&left, &front, &right);
+		/* 	If there are no walls on both sides */
+		if( (front < 600) && (right < 150) && (left < 150) ) 
+		{
+			
 			while(front < 700)
-			{
-				front = FetchSensor(FRONTSENSOR);
+			{	front =FetchSensor(FRONTSENSOR);
 				forward(1,1,1);
 			}
 
-			turnright(80);
+			turnleft(75);
 		}
 
-		FetchAllSensors(&left, &front, &right);
 
+			
 
 	}
 
