@@ -74,21 +74,24 @@ void main(void)
 			right = FetchSensor(RIGHTSENSOR);
 			/* Track off right wall for a bit */
 			totalerror = 0;
+
+			/*
 			for(i = 0; i < 200 ; i ++){
 				left = FetchSensor(LEFTSENSOR);
 				if(left > 200) break;
 				totalerror=trackleft(1, right-25);
 				correct(&totalerror);
 			}
+			*/
 
 			/* NO Tracking */
-			forward(30,1,1);
-
+			forward(220,1,1);
 			turnleft(75);
+			forward(5,1,1);
 		}
 		
-		/* 	If there is an opening on the right */	
-		if( (front < 700) && (right < 150) && (left > 150) )
+		/* 	If there is an opening on the right AND a wall in front*/	
+		if( (front > 300) && (right < 150) && (left > 150) )
 		{	
 			int i;
 			Delay10KTCYx(100);
@@ -107,11 +110,14 @@ void main(void)
 		}
 		
 		FetchAllSensors(&left, &front, &right);
+
 		/* 	If there are no walls on both sides */
 		if( (front < 600) && (right < 150) && (left < 150) ) 
 		{
 			
-			while(front < 700)
+			Delay10KTCYx(50);
+			Delay10KTCYx(50);
+			while(front <500)
 			{	front =FetchSensor(FRONTSENSOR);
 				forward(1,1,1);
 			}
