@@ -88,7 +88,6 @@ int trackleft(int steps,	int optimal)
 void correct(int *totalerror)
 {
 
-
 	/* 	Actually Correct Here	*/
 	// if mouse is tilted towards right
 	if( (*totalerror) < -200 ){	
