@@ -26,7 +26,7 @@
 
 //	90 - MAX speed
 //	150 - Safe Speed
-#define STEPDELAY 150
+#define STEPDELAY 130
 #include <p18f4620.h>
 #include <delays.h>
 

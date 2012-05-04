@@ -90,8 +90,10 @@ void main(void)
 			forward(5,1,1);
 		}
 		
-		/* 	If there is an opening on the right AND a wall in front*/	
-		if( (front > 300) && (right < 150) && (left > 150) )
+		FetchAllSensors(&left, &front, &right);
+
+		/* Opening on the right */
+		if( (front < 700) && (right < 160) && (left > 160) )
 		{	
 			int i;
 			Delay10KTCYx(100);
@@ -107,7 +109,9 @@ void main(void)
 				
 			forward(30,1,1);
 			turnright(75);
+			forward(10,1,1);
 		}
+
 		
 		FetchAllSensors(&left, &front, &right);
 
@@ -117,7 +121,7 @@ void main(void)
 			
 			Delay10KTCYx(50);
 			Delay10KTCYx(50);
-			while(front <500)
+			while(front <400)
 			{	front =FetchSensor(FRONTSENSOR);
 				forward(1,1,1);
 			}
