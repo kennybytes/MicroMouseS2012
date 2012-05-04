@@ -52,8 +52,21 @@ while(1)
 		FetchAllSensors(&left, &front, &right);
 
 		/*	if the front is clear and sides are blocked */
-		if( (front <= 600)  && (left > 130) ){
+		if( (front <= 400)  && (left > 130) ){
 			
+			if( (front > 100) && (right < 170) && (left > 100) )
+			{	
+				int i;
+				Delay10KTCYx(100);
+				left = FetchSensor(LEFTSENSOR);
+				totalerror = 0 ;
+					
+				forward(210,1,1);
+				turnright(75);
+				forward(5,1,1);
+
+				break;
+			}
 			/* Just keep tracking forward */
 			totalerror+=track(1);
 			correct(&totalerror);
@@ -62,27 +75,17 @@ while(1)
 			
 
 		/* Opening on the right */
-		if( (front > 100) && (right < 170) && (left > 120) )
-		{	
-			int i;
-			Delay10KTCYx(100);
-			left = FetchSensor(LEFTSENSOR);
-			totalerror = 0 ;
-				
-			forward(210,1,1);
-			turnright(75);
-			forward(5,1,1);
-
-			break;
-		}
 
 
 		/*	If at a dead end */
-		if( (front > 350) && (right > 150) && (left > 150) )
+		if( (front > 300) && (right > 150) && (left > 150) )
 		{
+			
+			Delay10KTCYx(100);
 			/* Turn Around */
-			track(30);
+			forward(15,1,1);
 			turnright(155);
+			totalerror+=track(2);
 			break;
 		}
 
@@ -93,19 +96,27 @@ while(1)
 			int i;
 			Delay10KTCYx(100);
 			right = FetchSensor(RIGHTSENSOR);
-
-			/* NO Tracking */
-			forward(230,1,1);
+			if( front < 80 )
+			{
+				/* NO Tracking */
+				forward(200,1,1);
+			}
+			else
+			{
+				Delay10KTCYx(100);
+				while(front < 500)
+				{
+				front = FetchSensor(FRONTSENSOR);
+				forward(1,1,1);
+				}
+			}
+				
 			turnleft(78);
 			forward(5,1,1);
 			
 			break;
 		}
-		
 
-
-		
-		FetchAllSensors(&left, &front, &right);
 
 		/* 	If there are no walls on both sides */
 		if( (front < 600) && (right < 150) && (left < 150) ) 
