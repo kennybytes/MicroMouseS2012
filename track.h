@@ -14,7 +14,7 @@
 
 
 #define OFFSETRIGHT 0
-#define OFFSETLEFT 0
+#define OFFSETLEFT 20
 #define OPTIMAL 180
 
 #include "motors.h"

@@ -63,7 +63,7 @@ void main(void)
 		{
 			/* Turn Around */
 			track(30);
-			turnright(160);
+			turnright(155);
 		}
 
 
@@ -87,7 +87,7 @@ void main(void)
 
 			/* NO Tracking */
 			forward(220,1,1);
-			turnleft(75);
+			turnleft(78);
 			forward(5,1,1);
 		}
 		
@@ -123,13 +123,8 @@ void main(void)
 		{
 			
 			Delay10KTCYx(50);
-			Delay10KTCYx(50);
-			while(front <400)
-			{	front =FetchSensor(FRONTSENSOR);
-				forward(1,1,1);
-			}
-
-			turnleft(75);
+			forward(200,1,1);
+			turnleft(78);
 		}
 
 
