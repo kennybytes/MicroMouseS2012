@@ -73,20 +73,10 @@ void main(void)
 			int i;
 			Delay10KTCYx(100);
 			right = FetchSensor(RIGHTSENSOR);
-			/* Track off right wall for a bit */
-			totalerror = 0;
 
-			/*
-			for(i = 0; i < 200 ; i ++){
-				left = FetchSensor(LEFTSENSOR);
-				if(left > 200) break;
-				totalerror=trackleft(1, right-25);
-				correct(&totalerror);
-			}
-			*/
 
 			/* NO Tracking */
-			forward(220,1,1);
+			forward(230,1,1);
 			turnleft(78);
 			forward(5,1,1);
 		}
@@ -100,17 +90,8 @@ void main(void)
 			Delay10KTCYx(100);
 			left = FetchSensor(LEFTSENSOR);
 			totalerror = 0 ;
-
-			/*
-			for(i = 0; i < 200 ; i ++){
-				right = FetchSensor(RIGHTSENSOR);
-				if(right > 200) break;
-				totalerror=trackright(1, left-25);
-				correct(&totalerror);
-			}
-			*/
 				
-			forward(200,1,1);
+			forward(210,1,1);
 			turnright(75);
 			forward(5,1,1);
 		}
@@ -127,8 +108,6 @@ void main(void)
 			turnleft(78);
 		}
 
-
-			
 
 	}
 
