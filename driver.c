@@ -42,6 +42,8 @@ void main(void)
 
 	}
 
+while(1)
+{
 
 	/* Main Program loop */
 	while(1) 
@@ -56,6 +58,7 @@ void main(void)
 			/* Just keep tracking forward */
 			totalerror+=track(1);
 			correct(&totalerror);
+			break;
 		}
 			
 		/*	If at a dead end */
@@ -64,6 +67,7 @@ void main(void)
 			/* Turn Around */
 			track(30);
 			turnright(155);
+			break;
 		}
 
 
@@ -74,14 +78,14 @@ void main(void)
 			Delay10KTCYx(100);
 			right = FetchSensor(RIGHTSENSOR);
 
-
 			/* NO Tracking */
 			forward(230,1,1);
 			turnleft(78);
 			forward(5,1,1);
+			
+			break;
 		}
 		
-		FetchAllSensors(&left, &front, &right);
 
 		/* Opening on the right */
 		if( (front > 100) && (right < 160) && (left > 160) )
@@ -94,6 +98,8 @@ void main(void)
 			forward(210,1,1);
 			turnright(75);
 			forward(5,1,1);
+
+			break;
 		}
 
 		
@@ -106,10 +112,11 @@ void main(void)
 			Delay10KTCYx(50);
 			forward(200,1,1);
 			turnleft(78);
+			break;
 		}
 
 
 	}
-
+}
 
 }
