@@ -51,7 +51,6 @@ while(1)
 
 		FetchAllSensors(&left, &front, &right);
 
-
 		/*	if the front is clear and sides are blocked */
 		if( (front <= 600)  && (left > 130) ){
 			
@@ -61,6 +60,23 @@ while(1)
 			break;
 		}
 			
+
+		/* Opening on the right */
+		if( (front > 100) && (right < 170) && (left > 120) )
+		{	
+			int i;
+			Delay10KTCYx(100);
+			left = FetchSensor(LEFTSENSOR);
+			totalerror = 0 ;
+				
+			forward(210,1,1);
+			turnright(75);
+			forward(5,1,1);
+
+			break;
+		}
+
+
 		/*	If at a dead end */
 		if( (front > 350) && (right > 150) && (left > 150) )
 		{
@@ -87,20 +103,6 @@ while(1)
 		}
 		
 
-		/* Opening on the right */
-		if( (front > 100) && (right < 160) && (left > 160) )
-		{	
-			int i;
-			Delay10KTCYx(100);
-			left = FetchSensor(LEFTSENSOR);
-			totalerror = 0 ;
-				
-			forward(210,1,1);
-			turnright(75);
-			forward(5,1,1);
-
-			break;
-		}
 
 		
 		FetchAllSensors(&left, &front, &right);
