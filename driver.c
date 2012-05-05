@@ -54,30 +54,26 @@ while(1)
 		/*	if the front is clear and sides are blocked */
 		if( (front <= 400)  && (left > 130) ){
 			
-
-			if( (front > 100) && (right < 170) && (left > 100) )
+			/* 	If there is a hole on the right */
+			if( (front > 170) && (right < 150) && (left > 120) )
 			{	
 				int i;
 				Delay10KTCYx(100);
 				left = FetchSensor(LEFTSENSOR);
 				totalerror = 0 ;
-			/*
-				forward(210,1,1);
-				turnright(75);
-				forward(5,1,1);
-			*/
 
 				while(front < 500)
 				{
-				front = FetchSensor(FRONTSENSOR);
-				forward(1,1,1);
+					front = FetchSensor(FRONTSENSOR);
+					forward(1,1,1);
 				}
 
 				turnright(82);
 				track(3);
-				correct(3);
+				correct(&totalerror);
 				break;
 			}
+
 			/* Just keep tracking forward */
 			totalerror+=track(1);
 			correct(&totalerror);
@@ -85,46 +81,61 @@ while(1)
 		}
 			
 
-		/* Opening on the right */
-
 		/*	If at a dead end */
-		if( (front > 300) && (right > 150) && (left > 150) )
+		if( (front > 500) && (right > 150) && (left > 150) )
 		{
-			
 			Delay10KTCYx(100);
 			/* Turn Around */
 			forward(15,1,1);
 			turnright(163);
 			totalerror+=track(2);
+			correct(&totalerror);
 			break;
 
 		}
 
 
 		/*	If there is an opening on the left */
-		if( (front < 700) && (right > 90) && (left < 90) )
+		if( (front < 700) && (right > 160) && (left < 80) )
 		{	
 			int i;
 			Delay10KTCYx(100);
 			right = FetchSensor(RIGHTSENSOR);
+			
+			/* if the front is far away */
 			if( front < 80 )
 			{
 				/* NO Tracking */
 				forward(220,1,1);
 			}
+
+			/* If the front is closer */
 			else
 			{
 				Delay10KTCYx(100);
+
+				/* wait for the front wall to turn */
 				while(front < 500)
 				{
-				front = FetchSensor(FRONTSENSOR);
-				forward(1,1,1);
+					front = FetchSensor(FRONTSENSOR);
+
+					/* If the right wall is there track off it*/
+					if(right > 150)
+					{
+						right = FetchSensor(RIGHTSENSOR);
+						totalerror+=track(1);
+						correct(&totalerror);
+					}
+					else
+					{
+						forward(1,1,1);
+					}
 				}
+					
 			}
-				
+
 			turnleft(78);
 			forward(5,1,1);
-			
 			break;
 		}
 
@@ -134,7 +145,12 @@ while(1)
 		{
 			
 			Delay10KTCYx(50);
-			forward(200,1,1);
+			while(left < 180)
+			{
+				forward(1,1,1);
+				left = FetchSensor(RIGHTSENSOR);
+			}
+			//forward(200,1,1);
 			turnleft(78);
 			break;
 		}
